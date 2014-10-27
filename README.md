@@ -13,6 +13,7 @@
  4. 添加 MySeqStack； 
  5. 添加 MyCircularQueue；
  6. 添加 calculateFactorial；
+ 7. 添加 MySingleCircularLinkedList；
 
 
   [1]: http://pan.baidu.com/s/1jGggQoe
