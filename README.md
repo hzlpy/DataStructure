@@ -14,6 +14,7 @@
  5. 添加 MyCircularQueue；
  6. 添加 calculateFactorial；
  7. 添加 MySingleCircularLinkedList；
+ 8. 添加 BinaryTree；
 
 
   [1]: http://pan.baidu.com/s/1jGggQoe
