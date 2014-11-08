@@ -18,6 +18,8 @@ void preTraverseBinaryTree(PBTNODE pRoot);
 void inTraverseBinaryTree(PBTNODE pRoot);
 //后序遍历
 void postTraverseBinaryTree(PBTNODE pRoot);
+//求二叉树中节点的个数
+int getNodeNum(PBTNODE pRoot);
 
 /*****************************************************************************
     *  @function	: main
@@ -43,6 +45,8 @@ int main(void)
 	printf("postTraverseBinaryTree： \n");
 	postTraverseBinaryTree(pTree);
 	printf("\n");
+
+	printf("The number of nodes in binary tree is %d\n",getNodeNum(pTree));
 	return 0;
 }
 
@@ -181,4 +185,21 @@ void postTraverseBinaryTree(PBTNODE pRoot)
 		//打印根节点
 		printf("%c ",pRoot->data);
 	}
+}
+/*****************************************************************************
+    *  @function    : getNodeNum 求二叉树节点的个数
+    *  @author   	: ZhangLe
+    *  @date     	: 2014/11/8 20:54
+    *  @version  	: ver 1.0
+    *  @inparam  	: 
+    *  @outparam 	: 
+	*  @description :
+*****************************************************************************/
+int getNodeNum(PBTNODE pRoot)
+{
+	if (NULL == pRoot)
+	{
+		return 0;
+	}
+	return getNodeNum(pRoot->pLeftChild) + getNodeNum(pRoot->pRightChild) + 1;
 }
