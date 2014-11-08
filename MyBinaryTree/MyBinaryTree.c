@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <malloc.h>
+#include <stdlib.h>
 typedef struct BTNode
 {
 	char data;
@@ -7,8 +8,10 @@ typedef struct BTNode
 	struct BTNode *pRightChild;
 }BTNODE, *PBTNODE;
 /*声明函数*/
-//创建一个链式二叉树
-PBTNODE createLinkedBinaryTree();
+//创建一个简单地二叉树
+PBTNODE createSimpleBinaryTree();
+//创建一个二叉树
+PBTNODE createBinaryTree();
 //先序遍历二叉树
 void preTraverseBinaryTree(PBTNODE pRoot);
 //中序遍历
@@ -17,25 +20,34 @@ void inTraverseBinaryTree(PBTNODE pRoot);
 void postTraverseBinaryTree(PBTNODE pRoot);
 
 /*****************************************************************************
-    *  @function    : main
-    *  @author   	: ZhangLe
-    *  @date     	: 2014/11/7 21:53
-    *  @version  	: ver 1.0
+    *  @function	: main
+    *  @author		: ZhangLe
+    *  @date		: 2014/11/7 21:53
+    *  @version		: ver 1.0
     *  @inparam  	: 
     *  @outparam 	: 
 	*  @description :
 *****************************************************************************/
 int main(void)
 {
-	PBTNODE pTree = createLinkedBinaryTree();
+	//PBTNODE pTree = createSimpleBinaryTree();
+	PBTNODE pTree;
+	printf("Please input values for tree node..\n");
+	pTree = createBinaryTree();
+	printf("preTraverseBinaryTree： \n"); 
 	preTraverseBinaryTree(pTree);
+	printf("\n");
+	printf("inTraverseBinaryTree： \n");
 	inTraverseBinaryTree(pTree);
+	printf("\n");
+	printf("postTraverseBinaryTree： \n");
 	postTraverseBinaryTree(pTree);
+	printf("\n");
 	return 0;
 }
 
 /*****************************************************************************
-    *  @function    : createLinkedBinaryTree 创建一个链式二叉树
+    *  @function	: createSimpleBinaryTree 创建一个链式二叉树
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/7 21:53
     *  @version  	: ver 1.0
@@ -43,7 +55,7 @@ int main(void)
     *  @outparam 	: pRoot 树的根节点地址
 	*  @description :
 *****************************************************************************/
-PBTNODE createLinkedBinaryTree()
+PBTNODE createSimpleBinaryTree()
 {
 	//分配内存
 	PBTNODE pA = (PBTNODE)malloc(sizeof(BTNODE));
@@ -68,6 +80,31 @@ PBTNODE createLinkedBinaryTree()
 	pE->pLeftChild = pE->pRightChild = NULL;
 	return pA;
 }
+
+PBTNODE createBinaryTree()
+{
+	char value;
+	PBTNODE pRoot;
+	scanf("%c",&value);
+	if ((value == '#') || (value == '\n'))
+	{
+		pRoot = NULL;
+	} 
+	else
+	{
+		pRoot = (PBTNODE)malloc(sizeof(BTNODE));
+		if (NULL == pRoot)
+		{
+			printf("内存分配失败，程序退出..");
+			exit(-1);
+		}
+		pRoot->data = value;
+		pRoot->pLeftChild = createBinaryTree();
+		pRoot->pRightChild = createBinaryTree();
+	}
+	return pRoot;
+}
+
 /*****************************************************************************
     *  @function    : preTraverseBinaryTree 先序遍历二叉树
     *  @author   	: ZhangLe
@@ -82,7 +119,7 @@ void preTraverseBinaryTree(PBTNODE pRoot)
 	if (NULL != pRoot)
 	{
 		//打印根节点
-		printf("%c \n",pRoot->data);
+		printf("%c ",pRoot->data);
 		if (NULL != pRoot->pLeftChild)
 		{
 			preTraverseBinaryTree(pRoot->pLeftChild);
@@ -112,7 +149,7 @@ void inTraverseBinaryTree(PBTNODE pRoot)
 			inTraverseBinaryTree(pRoot->pLeftChild);
 		}
 		//打印根节点
-		printf("%c \n",pRoot->data);
+		printf("%c ",pRoot->data);
 		if (NULL != pRoot->pRightChild)
 		{
 			inTraverseBinaryTree(pRoot->pRightChild);
@@ -142,6 +179,6 @@ void postTraverseBinaryTree(PBTNODE pRoot)
 			postTraverseBinaryTree(pRoot->pRightChild);
 		}
 		//打印根节点
-		printf("%c \n",pRoot->data);
+		printf("%c ",pRoot->data);
 	}
 }
