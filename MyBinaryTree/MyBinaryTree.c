@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <stdlib.h>
+
 typedef struct BTNode
 {
 	char data;
@@ -18,8 +19,12 @@ void preTraverseBinaryTree(PBTNODE pRoot);
 void inTraverseBinaryTree(PBTNODE pRoot);
 //后序遍历
 void postTraverseBinaryTree(PBTNODE pRoot);
+//层序遍历
+void levelTraverseBinaryTree(PBTNODE pRoot);
 //求二叉树中节点的个数
 int getNodeNum(PBTNODE pRoot);
+//求二叉树的深度
+int getDepth(PBTNODE pRoot);
 
 /*****************************************************************************
     *  @function	: main
@@ -45,8 +50,8 @@ int main(void)
 	printf("postTraverseBinaryTree： \n");
 	postTraverseBinaryTree(pTree);
 	printf("\n");
-
-	printf("The number of nodes in binary tree is %d\n",getNodeNum(pTree));
+	printf("The number of nodes in binary tree is %d.\n",getNodeNum(pTree));
+	printf("The depth of binary tree is %d.\n",getDepth(pTree));
 	return 0;
 }
 
@@ -84,7 +89,15 @@ PBTNODE createSimpleBinaryTree()
 	pE->pLeftChild = pE->pRightChild = NULL;
 	return pA;
 }
-
+/*****************************************************************************
+    *  @function    : createBinaryTree 创建二叉树
+    *  @author   	: ZhangLe
+    *  @date     	: 2014/11/9 19:52
+    *  @version  	: ver 1.0
+    *  @inparam  	: 
+    *  @outparam 	: 
+	*  @description :
+*****************************************************************************/
 PBTNODE createBinaryTree()
 {
 	char value;
@@ -186,6 +199,16 @@ void postTraverseBinaryTree(PBTNODE pRoot)
 		printf("%c ",pRoot->data);
 	}
 }
+
+void levelTraverseBinaryTree(PBTNODE pRoot)
+{
+// 	if (NULL == pRoot)
+// 	{
+// 		return;
+// 	}
+// 	queue<PBTNODE> q;
+}
+
 /*****************************************************************************
     *  @function    : getNodeNum 求二叉树节点的个数
     *  @author   	: ZhangLe
@@ -202,4 +225,25 @@ int getNodeNum(PBTNODE pRoot)
 		return 0;
 	}
 	return getNodeNum(pRoot->pLeftChild) + getNodeNum(pRoot->pRightChild) + 1;
+}
+/*****************************************************************************
+    *  @function    : getDepth 求二叉树的深度
+    *  @author   	: ZhangLe
+    *  @date     	: 2014/11/9 19:50
+    *  @version  	: ver 1.0
+    *  @inparam  	: 
+    *  @outparam 	: 
+	*  @description :
+*****************************************************************************/
+int getDepth(PBTNODE pRoot)
+{
+	int depthLeft = 0;
+	int depthRight = 0;
+	if (NULL == pRoot)
+	{
+		return 0;
+	}
+	depthLeft = getDepth(pRoot->pLeftChild);
+	depthRight = getDepth(pRoot->pRightChild);
+	return depthLeft > depthRight ? (depthLeft + 1) : (depthRight + 1);
 }
