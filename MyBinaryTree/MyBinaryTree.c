@@ -25,7 +25,10 @@ void levelTraverseBinaryTree(PBTNODE pRoot);
 int getNodeNum(PBTNODE pRoot);
 //求二叉树的深度
 int getDepth(PBTNODE pRoot);
-
+//求二叉树中第k层节点的个数
+int getKthLevelNodeNum(PBTNODE pRoot, int k);
+//求二叉树中叶子节点的个数
+int getLeafNodeNum(PBTNODE pRoot);
 /*****************************************************************************
     *  @function	: main
     *  @author		: ZhangLe
@@ -52,6 +55,7 @@ int main(void)
 	printf("\n");
 	printf("The number of nodes in binary tree is %d.\n",getNodeNum(pTree));
 	printf("The depth of binary tree is %d.\n",getDepth(pTree));
+	printf("The nodes number of the kth level is %d.\n",getKthLevelNodeNum(pTree,3));
 	return 0;
 }
 
@@ -246,4 +250,39 @@ int getDepth(PBTNODE pRoot)
 	depthLeft = getDepth(pRoot->pLeftChild);
 	depthRight = getDepth(pRoot->pRightChild);
 	return depthLeft > depthRight ? (depthLeft + 1) : (depthRight + 1);
+}
+
+/*****************************************************************************
+    *  @function    : getKthLevelNodeNum 求二叉树中第k层节点的个数
+    *  @author   	: ZhangLe
+    *  @date     	: 2014/11/10 20:35
+    *  @version  	: ver 1.0
+    *  @inparam  	: 
+    *  @outparam 	: 
+	*  @description :
+*****************************************************************************/
+int getKthLevelNodeNum(PBTNODE pRoot, int k)
+{
+	int kLeftNum = 0; //二叉树左子树第k层节点个数
+	int kRightNum = 0;//二叉树右子树第k层节点个数
+	if (k < 1) //层数小于1
+	{
+		return 0;
+	}
+	if (NULL == pRoot)
+	{
+		return 0;
+	}
+	if (1 == k)//层数为1
+	{
+		return k;
+	}
+	kLeftNum = getKthLevelNodeNum(pRoot->pLeftChild,k-1);//
+	kRightNum = getKthLevelNodeNum(pRoot->pRightChild,k-1);
+	return kLeftNum + kRightNum;
+}
+
+int getLeafNodeNum(PBTNODE pRoot)
+{
+
 }
