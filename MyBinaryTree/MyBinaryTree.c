@@ -55,7 +55,8 @@ int main(void)
 	printf("\n");
 	printf("The number of nodes in binary tree is %d.\n",getNodeNum(pTree));
 	printf("The depth of binary tree is %d.\n",getDepth(pTree));
-	printf("The nodes number of the kth level is %d.\n",getKthLevelNodeNum(pTree,3));
+	printf("The nodes' number of the kth level is %d.\n",getKthLevelNodeNum(pTree,3));
+	printf("The leaf nodes' number is %d.\n",getLeafNodeNum(pTree));
 	return 0;
 }
 
@@ -282,7 +283,28 @@ int getKthLevelNodeNum(PBTNODE pRoot, int k)
 	return kLeftNum + kRightNum;
 }
 
+/*****************************************************************************
+    *  @function    : getLeafNodeNum 求二叉树中叶子节点的个数
+    *  @author   	: ZhangLe
+    *  @date     	: 2014/11/10 20:54
+    *  @version  	: ver 1.0
+    *  @inparam  	: 
+    *  @outparam 	: 
+	*  @description : 度为0的节点被称为叶子节点
+*****************************************************************************/
 int getLeafNodeNum(PBTNODE pRoot)
 {
-
+	int leftLeafNodeNum = 0;   //左边叶子节点个数
+	int rightLeafNodeNum = 0;  //右边叶子节点个数
+	if (NULL == pRoot)
+	{
+		return 0;
+	}
+	if(NULL == pRoot->pLeftChild && NULL == pRoot->pRightChild)
+	{
+		return 1;
+	}
+	leftLeafNodeNum = getLeafNodeNum(pRoot->pLeftChild);	//左子树中叶子节点的个数
+	rightLeafNodeNum = getLeafNodeNum(pRoot->pRightChild);	//右子树中叶子节点的个数
+	return leftLeafNodeNum + rightLeafNodeNum;
 }
