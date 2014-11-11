@@ -13,8 +13,10 @@ typedef enum _bool
 }bool;
 
 //函数声明
-/*创建链表*/
+/*尾插法创建链表*/
 PNODE createLinkedList();
+/*头插法创建链表*/
+PNODE createLinkedList2();
 /*遍历链表*/
 void traverseLinkedList(PNODE pHeadNode);
 // /*删除节点*/
@@ -34,8 +36,8 @@ int main(void)
 {
 	int d_value;
 	//创建链表
-	PNODE pHeadNode = createLinkedList();
-	PNODE pReverseHead;
+	//PNODE pHeadNode = createLinkedList();
+	PNODE pHeadNode = createLinkedList2();
 	//判断链表时候为空
 	if (isEmpty(pHeadNode))
 	{
@@ -112,6 +114,53 @@ PNODE createLinkedList()
 	}
 	return pHeadNode;
 }
+
+/*****************************************************************************
+    * @function    	: createLinkedList2 利用头插法创建单链表
+    * @author   	: ZhangLe
+    * @date     	: 2014/11/11 21:34
+    * @version  	: ver 1.0
+    * @inparam  	: void
+    * @description 	:
+*****************************************************************************/
+PNODE createLinkedList2()
+{
+	//声明头节点，并为它动态分配内存
+	PNODE pHead = (PNODE)malloc(sizeof(NODE));
+	int length; //待创建链表的长度
+	int data;   //节点的值
+	int i;      //循环变量
+	PNODE pNew;
+	//检查内存是否分配成功
+	if (NULL == pHead)
+	{
+		printf("动态分配内存失败，程序退出。\n");
+		exit(-1);
+	}
+	pHead->pNext = NULL; //初始化为空链表
+	//内存分配成功，开始头插法创建链表
+	printf("Please input the length of linked list you want to create: ");
+	scanf("%d",&length);
+	for (i=0; i<length; ++i)
+	{
+		//为新节点分配内存
+		pNew = (PNODE)malloc(sizeof(NODE));
+		//检查内存是否分配成功
+		if (NULL == pNew)
+		{
+			printf("动态分配内存失败，程序退出。\n");
+			exit(-1);
+		}
+		//内存分配成功，提示为新节点输入值
+		printf("Please input a value for new node: ");
+		scanf("%d", &data);
+		pNew->value = data;
+		pNew->pNext = pHead->pNext;
+		pHead->pNext = pNew;
+	}
+	return pHead;
+}
+
 /*****************************************************************************
     *  @brief    : traverseLinkedList 遍历单链表
     *  @author   : Zhangle
