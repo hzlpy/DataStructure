@@ -29,22 +29,24 @@ bool isEmpty(PNODE pHeadNode);
 int length(PNODE pHeadNode);
 /*冒泡排序*/
 void bubbleSort(PNODE pHeadNode);
+
 int main(void)
 {
 	int d_value;
 	//创建链表
 	PNODE pHeadNode = createLinkedList();
-// 	//判断链表时候为空
-// 	if (isEmpty(pHeadNode))
-// 	{
-// 		printf("链表为空。\n");
-// 	}
-// 	else
-// 	{
-// 		printf("链表不为空。\n");
-// 	}
-// 	//链表的长度
-// 	printf("链表长度为 %d \n",length(pHeadNode));
+	PNODE pReverseHead;
+	//判断链表时候为空
+	if (isEmpty(pHeadNode))
+	{
+		printf("链表为空。\n");
+	}
+	else
+	{
+		printf("链表不为空。\n");
+	}
+	//链表的长度
+ 	printf("链表长度为 %d \n",length(pHeadNode));
 	//遍历链表
 	traverseLinkedList(pHeadNode);
 
@@ -52,23 +54,24 @@ int main(void)
 // 	bubbleSort(pHeadNode);
 // 	traverseLinkedList(pHeadNode);
 
-	//添加节点
-	insertNode(pHeadNode,4,100);
-	traverseLinkedList(pHeadNode);
-	//删除节点
+// 	//添加节点
+// 	insertNode(pHeadNode,4,100);
+// 	traverseLinkedList(pHeadNode);
+// 	//删除节点
+// 	deleteNode(pHeadNode,4,&d_value);
+// 	traverseLinkedList(pHeadNode);
+// 	printf("被删除的数字是 %d \n",d_value);
 
-	deleteNode(pHeadNode,4,&d_value);
-	traverseLinkedList(pHeadNode);
-	printf("被删除的数字是 %d \n",d_value);
 }
 
 /*****************************************************************************
-    *  @brief    : createLinkedList 创建单链表
-    *  @author   : Zhangle
-    *  @date     : 2014/10/19 10:10
-    *  @version  : ver 1.0
-    *  @inparam  : 
-    *  @outparam :  
+    * @function    	: createLinkedList 创建一个单链表
+    * @author   	: ZhangLe
+    * @date     	: 2014/11/11 21:21
+    * @version  	: ver 2.0
+    * @inparam  	: void
+    * @outparam 	: void
+    * @description 	: 
 *****************************************************************************/
 PNODE createLinkedList()
 {
@@ -86,7 +89,6 @@ PNODE createLinkedList()
 		printf("内存申请失败，退出程序。\n");
 		exit(-1);
 	}
-
 	//输入链表的长度，即节点的个数
 	printf("请输出链表的长度: ");
 	scanf("%d",&length);
@@ -104,9 +106,9 @@ PNODE createLinkedList()
 		printf("请输入第%d个节点的值 = ",i+1);
 		scanf("%d",&value);
 		pNewNode->value = value;
-		pTailNode->pNext = pNewNode;
+		pTailNode->pNext = pNewNode;//pTailNode,pHeadNode下一个节点地址指向pNewNode
 		pNewNode->pNext = NULL;
-		pTailNode = pNewNode;
+		pTailNode = pNewNode;//将pNewNode指定为pTailNode,pHeadNode->pNext指向pNewNode，现在也指向pTailNode
 	}
 	return pHeadNode;
 }
