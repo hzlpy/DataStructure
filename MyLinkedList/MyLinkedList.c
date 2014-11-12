@@ -350,13 +350,13 @@ PNODE reverse(PNODE pHeadNode)
 		exit(-1);
 	}
 	pCurrNode = pHeadNode->pNext;
-	//pTemp = pCurrNode;
 	while (NULL != pCurrNode)//如果当前节点不为空
 	{
-		PNODE pTemp = pCurrNode;
- 		pTemp->pNext = pReverseHead->pNext;
- 		pReverseHead->pNext = pTemp;
-		pCurrNode = pCurrNode->pNext;
+// 		PNODE pTemp = pReverseHead->pNext;
+//  		pReverseHead->pNext = pCurrNode;
+//  		pReverseHead->pNext = pTemp;
+// 
+// 		pCurrNode = pCurrNode->pNext;
 	}
 	return pReverseHead;
 }
