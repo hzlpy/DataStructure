@@ -31,26 +31,23 @@ bool isEmpty(PNODE pHeadNode);
 int length(PNODE pHeadNode);
 /*冒泡排序*/
 void bubbleSort(PNODE pHeadNode);
-
+/*反转单链表*/
+PNODE reverse(PNODE pHeadNode);
 int main(void)
 {
 	int d_value;
+	PNODE pReverseNode;
 	//创建链表
 	//PNODE pHeadNode = createLinkedList();
-	PNODE pHeadNode = createLinkedList2();
-	//判断链表时候为空
-	if (isEmpty(pHeadNode))
-	{
-		printf("链表为空。\n");
-	}
-	else
-	{
-		printf("链表不为空。\n");
-	}
+	PNODE pHeadNode = createLinkedList();
+
 	//链表的长度
  	printf("链表长度为 %d \n",length(pHeadNode));
 	//遍历链表
 	traverseLinkedList(pHeadNode);
+
+	pReverseNode = reverse(pHeadNode);
+	traverseLinkedList(pReverseNode);
 
 //  	//排序
 // 	bubbleSort(pHeadNode);
@@ -327,4 +324,39 @@ bool deleteNode(PNODE pHeadNode, int index, int *val)
 	p->pNext = q->pNext;
 	free(q);
 	q = NULL;
+}
+
+/*
+ * @function    : reverse 单链表反转
+ * @author   	: ZhangLe
+ * @date     	: 2014/11/12 21:09
+ * @version  	: ver 1.0
+ * @inparam  	: pHeadNode 被反转的单链表的头节点
+ * @outparam    : pReverseHead 反转后单链表的头节点
+ * @description : 
+ */
+PNODE reverse(PNODE pHeadNode)
+{
+	PNODE pReverseHead;
+	PNODE pCurrNode;
+	//PNODE pTemp;
+	//动态分配内存
+	pReverseHead = (PNODE)malloc(sizeof(NODE));
+	pReverseHead->pNext = NULL;
+	//检查内存是否分配成功
+	if (NULL == pReverseHead)
+	{
+		printf("内存分配失败，程序退出");
+		exit(-1);
+	}
+	pCurrNode = pHeadNode->pNext;
+	//pTemp = pCurrNode;
+	while (NULL != pCurrNode)//如果当前节点不为空
+	{
+		PNODE pTemp = pCurrNode;
+ 		pTemp->pNext = pReverseHead->pNext;
+ 		pReverseHead->pNext = pTemp;
+		pCurrNode = pCurrNode->pNext;
+	}
+	return pReverseHead;
 }
