@@ -33,6 +33,8 @@ int length(PNODE pHeadNode);
 void bubbleSort(PNODE pHeadNode);
 /*反转单链表*/
 PNODE reverse(PNODE pHeadNode);
+/*反转单链表2*/
+PNODE reverse2(PNODE pHeadNode);
 int main(void)
 {
 	int d_value;
@@ -46,7 +48,7 @@ int main(void)
 	//遍历链表
 	traverseLinkedList(pHeadNode);
 
-	pReverseNode = reverse(pHeadNode);
+	pReverseNode = reverse2(pHeadNode);
 	traverseLinkedList(pReverseNode);
 
 //  	//排序
@@ -341,6 +343,11 @@ PNODE reverse(PNODE pHeadNode)
 	PNODE pReverseHead;
 	PNODE pCurrNode;
 	PNODE pTemp;
+
+	if (NULL == pHeadNode)
+	{
+		return NULL;
+	}
 	//动态分配内存
 	pReverseHead = (PNODE)malloc(sizeof(NODE));
 	pReverseHead->pNext = NULL;
@@ -359,4 +366,32 @@ PNODE reverse(PNODE pHeadNode)
 		pReverseHead->pNext->pNext = pTemp; //
 	}
 	return pReverseHead;
+}
+
+/*
+ * @function    : reverse2
+ * @author   	: ZhangLe
+ * @date     	: 2014/11/13 19:14
+ * @version  	: ver 1.0
+ * @inparam  	: void
+ * @outparam    : void
+ * @description : 
+ */
+PNODE reverse2(PNODE pHeadNode)
+{
+	PNODE pCurrNode, pTempNode;
+
+	if (NULL == pHeadNode)
+	{
+		return NULL;
+	}
+	pCurrNode = pHeadNode->pNext;
+	while (NULL != pCurrNode->pNext)				//pTempNode与pCurrNode进行交换
+	{	
+		pTempNode = pCurrNode->pNext;		        //pTempNode是pCurrNode的后续节点
+		pCurrNode->pNext = pTempNode->pNext;			
+		pTempNode->pNext = pHeadNode->pNext;
+		pHeadNode->pNext = pTempNode;
+	}
+	return pHeadNode;
 }
