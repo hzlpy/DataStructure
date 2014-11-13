@@ -324,6 +324,7 @@ bool deleteNode(PNODE pHeadNode, int index, int *val)
 	p->pNext = q->pNext;
 	free(q);
 	q = NULL;
+	return true;
 }
 
 /*
@@ -333,13 +334,13 @@ bool deleteNode(PNODE pHeadNode, int index, int *val)
  * @version  	: ver 1.0
  * @inparam  	: pHeadNode 被反转的单链表的头节点
  * @outparam    : pReverseHead 反转后单链表的头节点
- * @description : 
+ * @description : 创建一个新的单链表，从被反转的链表中依次取出节点放到新的单链表中，类似头插法
  */
 PNODE reverse(PNODE pHeadNode)
 {
 	PNODE pReverseHead;
 	PNODE pCurrNode;
-	//PNODE pTemp;
+	PNODE pTemp;
 	//动态分配内存
 	pReverseHead = (PNODE)malloc(sizeof(NODE));
 	pReverseHead->pNext = NULL;
@@ -350,13 +351,12 @@ PNODE reverse(PNODE pHeadNode)
 		exit(-1);
 	}
 	pCurrNode = pHeadNode->pNext;
-	while (NULL != pCurrNode)//如果当前节点不为空
+	while (NULL != pCurrNode)				//如果当前节点不为空
 	{
-// 		PNODE pTemp = pReverseHead->pNext;
-//  		pReverseHead->pNext = pCurrNode;
-//  		pReverseHead->pNext = pTemp;
-// 
-// 		pCurrNode = pCurrNode->pNext;
+		pTemp = pReverseHead->pNext;		//保存pReverseHead中的后续节点
+		pReverseHead->pNext = pCurrNode;	//将pHeadNode中的当前节点pCurrNode放到pReverseHead中
+		pCurrNode = pCurrNode->pNext;		//当前节点pCurrNode指向下一个节点
+		pReverseHead->pNext->pNext = pTemp; //
 	}
 	return pReverseHead;
 }
