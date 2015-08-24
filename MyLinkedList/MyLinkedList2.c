@@ -5,7 +5,7 @@
 typedef struct node{
 	struct node *pNext;
 	int value;
-} NODE, *PNODE;
+} NODE, *PNODE, LinkList;
 
 PNODE createLinkedList()
 {
@@ -110,93 +110,93 @@ PNODE reverse(PNODE pHeadNode)
 //如果index = 2，表示在第2个节点前插入一个新节点
 void insert(PNODE pHeadNode, int index, int value)
 {
-    int i = 0;
-    PNODE pNode;//定义一个节点，表示第(index-1)个节点
-    PNODE pNew;
-    printf("input new node's index and value..\n");
-    scanf("%d,%d", &index, &value);
-    if (NULL == pHeadNode)
-    {
-        return;
-    }
-    if (index <= 0 && index > length(pHeadNode)+1)
-    {
-        return;
-    }
+	int i = 0;
+	PNODE pNode;//定义一个节点，表示第(index-1)个节点
+	PNODE pNew;
+	printf("input new node's index and value..\n");
+	scanf("%d,%d", &index, &value);
+	if (NULL == pHeadNode)
+	{
+		return;
+	}
+	if (index <= 0 && index > length(pHeadNode)+1)
+	{
+		return;
+	}
 
-    pNode = pHeadNode;
-    while (NULL != pNode->pNext)
-    {
-        i ++;
-        if (i <= index - 1)
-        {
-            pNode = pNode->pNext;
-        }
-        else
-        {
-            break;
-        }
-    }
-    //我们需要在第(index-1)个节点与第index个节点之间插入一个新的节点
-    pNew = (PNODE)malloc(sizeof(NODE));
-    if (NULL == pNew)
-    {
-        return;
-    }
-    pNew->value = value;
-    pNew->pNext = NULL;
-    if (index == length(pHeadNode)+1)
-    {
-        pNode->pNext = pNew;
-    }
-    else
-    {
-        pNew->pNext = pNode->pNext;
-        pNode->pNext = pNew;
-    }
+	pNode = pHeadNode;
+	while (NULL != pNode->pNext)
+	{
+		i ++;
+		if (i <= index - 1)
+		{
+			pNode = pNode->pNext;
+		}
+		else
+		{
+			break;
+		}
+	}
+	//我们需要在第(index-1)个节点与第index个节点之间插入一个新的节点
+	pNew = (PNODE)malloc(sizeof(NODE));
+	if (NULL == pNew)
+	{
+		return;
+	}
+	pNew->value = value;
+	pNew->pNext = NULL;
+	if (index == length(pHeadNode)+1)
+	{
+		pNode->pNext = pNew;
+	}
+	else
+	{
+		pNew->pNext = pNode->pNext;
+		pNode->pNext = pNew;
+	}
 }
 //链表节点从1开始计数。
 //删掉第index个节点
 void deleteNode(PNODE pHeadNode, int index)
 {
-    PNODE pNode;
-    int i = 0;
-    if(pHeadNode == NULL)
-    {
-        return;
-    }
+	PNODE pNode;
+	int i = 0;
+	if(pHeadNode == NULL)
+	{
+		return;
+	}
 
-    printf("input delete node's index..\n");
-    scanf("%d", &index);
+	printf("input delete node's index..\n");
+	scanf("%d", &index);
 
-    if (index <= 0 && index > length(pHeadNode))
-    {
-        return;
-    }
-    //pNode为第(index-1)个节点
-    pNode = pHeadNode;
-    while (NULL != pNode->pNext)
-    {
-        i++;
-        if (i<index) {
-            pNode = pNode->pNext;
-        }
-        else {
-            break;
-        }
-    }
-    if (index == length(pHeadNode))
-    {
-        //pNode = pNode->pNext;
-        //free(pNode);
-        //pNode = NULL;
-        pNode->pNext = NULL;
-        return;
-    }
-    PNODE pTemp = pNode->pNext;
-    pNode->pNext = pNode->pNext->pNext;
-    free(pTemp);
-    pTemp = NULL;
+	if (index <= 0 && index > length(pHeadNode))
+	{
+		return;
+	}
+	//pNode为第(index-1)个节点
+	pNode = pHeadNode;
+	while (NULL != pNode->pNext)
+	{
+		i++;
+		if (i<index) {
+			pNode = pNode->pNext;
+		}
+		else {
+			break;
+		}
+	}
+	if (index == length(pHeadNode))
+	{
+		//pNode = pNode->pNext;
+		//free(pNode);
+		//pNode = NULL;
+		pNode->pNext = NULL;
+		return;
+	}
+	PNODE pTemp = pNode->pNext;
+	pNode->pNext = pNode->pNext->pNext;
+	free(pTemp);
+	pTemp = NULL;
 }
 
 //找出单链表中倒数第k个节点
@@ -229,23 +229,58 @@ void printReverse(PNODE pHeadNode)
 	}
 }
 
+//寻找单链表的中间结点
+NODE* getMidNode(NODE *pHeadNode)
+{
+	//判断头结点时候为空
+	if (NULL == pHeadNode) {
+		return NULL;
+	}
+	//定义两个指针
+	PNODE slow, quick, first;
+	first = pHeadNode->pNext;
+	slow = quick = first;
+	//quick每次移动两步，slow每次移动一步
+	//当quick到达最后一个结点时，slow便指向中间结点
+	while ((quick->pNext !=NULL) && (quick->pNext->pNext != NULL)) {
+		quick = quick->pNext->pNext;
+		slow = slow->pNext;
+	}
+	return slow;
+}
+
+//有疑问
+// void getMidNode2(LinkList *pHeadNode, NODE *mid)
+// {
+// 	PNODE temp = pHeadNode;
+// 	while (pHeadNode->pNext->pNext != NULL) {
+// 		pHeadNode = pHeadNode->pNext->pNext;
+// 		temp = temp->pNext;
+// 		mid = temp;
+// 	}
+// }
+
 int main()
 {
 	PNODE pHeadNode = createLinkedList();
 	int len = length(pHeadNode);
 	PNODE pReverseHead;
-    int index,value, k;
+	int index,value, k;
 	printf("len = %d\n", len);
 	traverse(pHeadNode);
 	//pReverseHead = reverse(pHeadNode);
 	//traverse(pReverseHead);
-    //insert(pHeadNode, index, value);
-    //traverse(pHeadNode);
-    //deleteNode(pHeadNode, index);
-    //traverse(pHeadNode);
-	printReverse(pHeadNode);
-	printf("\n");
-	k = 2;
-	printf("Last %d node is %d\n",k, getLastKNode(pHeadNode, k)->value);
+	//insert(pHeadNode, index, value);
+	//traverse(pHeadNode);
+	//deleteNode(pHeadNode, index);
+	//traverse(pHeadNode);
+	//printReverse(pHeadNode);
+	//printf("\n");
+	//k = 2;
+	//printf("Last %d node is %d\n",k, getLastKNode(pHeadNode, k)->value);
+	printf("Mid node is %d\n", getMidNode(pHeadNode)->value);
+	//NODE *mid = pHeadNode;
+	//getMidNode2(pHeadNode,mid);
+	//printf("Mid node is %d\n", mid->value);
 	return 0;
 }
