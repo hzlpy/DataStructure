@@ -298,6 +298,39 @@ int isLoop(LinkList *pHeadNode) {
 	return -1;
 }
 
+//合并两个有序(默认升序)的链表
+LinkList *mergeTwoList(LinkList *L1, LinkList *L2)
+{
+	if (NULL == L1) {
+		return L2;
+	} else if (NULL == L2) {
+		return L2;
+	}
+	LinkList *L3 = L1;
+	PNODE tail = L3;
+	tail->pNext = NULL;
+	PNODE cur1 = L1->pNext;
+	PNODE cur2 = L2->pNext;
+	while (NULL != cur1 && NULL != cur2) {
+		if (cur1->value > cur2->value) {
+			tail->pNext = cur2;
+			tail = cur2;
+			cur2 = cur2->pNext;
+		} else {
+			tail->pNext = cur1;
+			tail = cur1;
+			cur1 = cur1->pNext;
+		}
+		if (NULL != cur1) {
+			tail->pNext = cur1;
+		}
+		if (NULL != cur2) {
+			tail->pNext = cur2;
+		}
+	}
+	return L3;
+}
+
 int main()
 {
 	PNODE pHeadNode = createLinkedList();
