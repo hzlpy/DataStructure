@@ -260,6 +260,23 @@ NODE* getMidNode(NODE *pHeadNode)
 // 	}
 // }
 
+//对链表进行排序
+void sort(LinkList *pHeadNode) {
+	PNODE first = pHeadNode->pNext;
+	PNODE t1 = first;
+	PNODE t2 = first;
+	int temp;
+	for (t1 = first; t1->pNext != NULL; t1 = t1->pNext) {
+		for (t2 = first; t2->pNext != NULL; t2 = t2->pNext) {
+			if (t2->value > t2->pNext->value) {
+				temp = t2->value;
+				t2->value = t2->pNext->value;
+				t2->pNext->value = temp;
+			}
+		}
+	}
+}
+
 int main()
 {
 	PNODE pHeadNode = createLinkedList();
@@ -278,9 +295,13 @@ int main()
 	//printf("\n");
 	//k = 2;
 	//printf("Last %d node is %d\n",k, getLastKNode(pHeadNode, k)->value);
-	printf("Mid node is %d\n", getMidNode(pHeadNode)->value);
+	//printf("Mid node is %d\n", getMidNode(pHeadNode)->value);
 	//NODE *mid = pHeadNode;
 	//getMidNode2(pHeadNode,mid);
 	//printf("Mid node is %d\n", mid->value);
+
+	sort(pHeadNode);
+	traverse(pHeadNode);
+
 	return 0;
 }
