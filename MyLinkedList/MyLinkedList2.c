@@ -237,13 +237,13 @@ NODE* getMidNode(NODE *pHeadNode)
 		return NULL;
 	}
 	//定义两个指针
-	PNODE slow, quick, first;
+	PNODE slow, fast, first;
 	first = pHeadNode->pNext;
-	slow = quick = first;
+	slow = fast = first;
 	//quick每次移动两步，slow每次移动一步
 	//当quick到达最后一个结点时，slow便指向中间结点
-	while ((quick->pNext !=NULL) && (quick->pNext->pNext != NULL)) {
-		quick = quick->pNext->pNext;
+	while ((fast->pNext !=NULL) && (fast->pNext->pNext != NULL)) {
+		fast = fast->pNext->pNext;
 		slow = slow->pNext;
 	}
 	return slow;
@@ -277,6 +277,27 @@ void sort(LinkList *pHeadNode) {
 	}
 }
 
+//判断单链表时候有环
+int isLoop(LinkList *pHeadNode) {
+	//判断头结点时候为空
+	if (NULL == pHeadNode) {
+		return -1;
+	}
+	//定义指针
+	PNODE slow, fast;
+	slow = fast = pHeadNode;
+	//quick每次移动两步，slow每次移动一步
+	//当quick到达最后一个结点时，slow便指向中间结点
+	while ((fast->pNext !=NULL) && (fast->pNext->pNext != NULL)) {
+		fast = fast->pNext->pNext;
+		slow = slow->pNext;
+		if (fast == slow) {
+			return 1;
+		}
+	}
+	return -1;
+}
+
 int main()
 {
 	PNODE pHeadNode = createLinkedList();
@@ -299,9 +320,8 @@ int main()
 	//NODE *mid = pHeadNode;
 	//getMidNode2(pHeadNode,mid);
 	//printf("Mid node is %d\n", mid->value);
-
-	sort(pHeadNode);
-	traverse(pHeadNode);
-
+	//sort(pHeadNode);
+	//traverse(pHeadNode);
+	printf("LOOP ? %d \n", isLoop(pHeadNode));
 	return 0;
 }
