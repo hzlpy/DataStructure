@@ -3,6 +3,8 @@
 
 标签： 数据结构 二叉树
 
+二叉树有两种存储方式，数组和链式存储，对于数组来说，我们利用二叉树的性质然后利用下标可以方便的找到一个节点的子节点和父节点。顺序存储方式适合保存完全二叉树。而对于非完全二叉树并，用链式存储。
+
 ---
 ### 与树有关的术语
 
@@ -38,3 +40,4 @@
 
   [1]: http://zh.wikipedia.org/wiki/%E6%A0%91_%28%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%29#.E6.9E.84.E9.80.A0.E7.A9.BA.E6.A0.91
   [2]: http://blog.csdn.net/luckyxiaoqiang/article/details/7518888#topic1
+  [3]: [数据结构：二叉树的链式存储](http://www.cnblogs.com/MrSaver/p/6059918.html)

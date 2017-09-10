@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <malloc.h>
+//#include <malloc.h>
 #include <stdlib.h>
 
 typedef struct BTNode
@@ -8,26 +8,27 @@ typedef struct BTNode
 	struct BTNode *pLeftChild;
 	struct BTNode *pRightChild;
 }BTNODE, *PBTNODE;
-/*ÉùÃ÷º¯Êı*/
-//´´½¨Ò»¸ö¼òµ¥µØ¶ş²æÊ÷
+
+/*å£°æ˜å‡½æ•°*/
+//åˆ›å»ºä¸€ä¸ªç®€å•åœ°äºŒå‰æ ‘
 PBTNODE createSimpleBinaryTree();
-//´´½¨Ò»¸ö¶ş²æÊ÷
+//åˆ›å»ºä¸€ä¸ªäºŒå‰æ ‘
 PBTNODE createBinaryTree();
-//ÏÈĞò±éÀú¶ş²æÊ÷
+//å…ˆåºéå†äºŒå‰æ ‘
 void preTraverseBinaryTree(PBTNODE pRoot);
-//ÖĞĞò±éÀú
+//ä¸­åºéå†
 void inTraverseBinaryTree(PBTNODE pRoot);
-//ºóĞò±éÀú
+//ååºéå†
 void postTraverseBinaryTree(PBTNODE pRoot);
-//²ãĞò±éÀú
+//å±‚åºéå†
 void levelTraverseBinaryTree(PBTNODE pRoot);
-//Çó¶ş²æÊ÷ÖĞ½ÚµãµÄ¸öÊı
+//æ±‚äºŒå‰æ ‘ä¸­èŠ‚ç‚¹çš„ä¸ªæ•°
 int getNodeNum(PBTNODE pRoot);
-//Çó¶ş²æÊ÷µÄÉî¶È
+//æ±‚äºŒå‰æ ‘çš„æ·±åº¦
 int getDepth(PBTNODE pRoot);
-//Çó¶ş²æÊ÷ÖĞµÚk²ã½ÚµãµÄ¸öÊı
+//æ±‚äºŒå‰æ ‘ä¸­ç¬¬kå±‚èŠ‚ç‚¹çš„ä¸ªæ•°
 int getKthLevelNodeNum(PBTNODE pRoot, int k);
-//Çó¶ş²æÊ÷ÖĞÒ¶×Ó½ÚµãµÄ¸öÊı
+//æ±‚äºŒå‰æ ‘ä¸­å¶å­èŠ‚ç‚¹çš„ä¸ªæ•°
 int getLeafNodeNum(PBTNODE pRoot);
 /*****************************************************************************
     *  @function	: main
@@ -44,46 +45,47 @@ int main(void)
 	PBTNODE pTree;
 	printf("Please input values for tree node..\n");
 	pTree = createBinaryTree();
-	printf("preTraverseBinaryTree£º \n"); 
+	printf("preTraverseBinaryTreeï¼š \n"); 
 	preTraverseBinaryTree(pTree);
 	printf("\n");
-	printf("inTraverseBinaryTree£º \n");
+	printf("inTraverseBinaryTreeï¼š \n");
 	inTraverseBinaryTree(pTree);
 	printf("\n");
-	printf("postTraverseBinaryTree£º \n");
+	printf("postTraverseBinaryTreeï¼š \n");
 	postTraverseBinaryTree(pTree);
 	printf("\n");
 	printf("The number of nodes in binary tree is %d.\n",getNodeNum(pTree));
 	printf("The depth of binary tree is %d.\n",getDepth(pTree));
-	printf("The nodes' number of the kth level is %d.\n",getKthLevelNodeNum(pTree,3));
+	int k = 3;
+	printf("The nodes' number of the %dth level is %d.\n",k, getKthLevelNodeNum(pTree, k));
 	printf("The leaf nodes' number is %d.\n",getLeafNodeNum(pTree));
 	return 0;
 }
 
 /*****************************************************************************
-    *  @function	: createSimpleBinaryTree ´´½¨Ò»¸öÁ´Ê½¶ş²æÊ÷
+    *  @function	: createSimpleBinaryTree åˆ›å»ºä¸€ä¸ªé“¾å¼äºŒå‰æ ‘
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/7 21:53
     *  @version  	: ver 1.0
     *  @inparam  	: void
-    *  @outparam 	: pRoot Ê÷µÄ¸ù½ÚµãµØÖ·
+    *  @outparam 	: pRoot æ ‘çš„æ ¹èŠ‚ç‚¹åœ°å€
 	*  @description :
 *****************************************************************************/
 PBTNODE createSimpleBinaryTree()
 {
-	//·ÖÅäÄÚ´æ
+	//åˆ†é…å†…å­˜
 	PBTNODE pA = (PBTNODE)malloc(sizeof(BTNODE));
 	PBTNODE pB = (PBTNODE)malloc(sizeof(BTNODE));
 	PBTNODE pC = (PBTNODE)malloc(sizeof(BTNODE));
 	PBTNODE pD = (PBTNODE)malloc(sizeof(BTNODE));
 	PBTNODE pE = (PBTNODE)malloc(sizeof(BTNODE));
-	//¸³Öµ
+	//èµ‹å€¼
 	pA->data = 'A';
 	pB->data = 'B';
 	pC->data = 'C';
 	pD->data = 'D';
 	pE->data = 'E';
-	//Á´½Ó
+	//é“¾æ¥
 	pA->pLeftChild = pB;
 	pA->pRightChild = pC;
 	pB->pLeftChild = pB->pRightChild = NULL;
@@ -95,13 +97,13 @@ PBTNODE createSimpleBinaryTree()
 	return pA;
 }
 /*****************************************************************************
-    *  @function    : createBinaryTree ´´½¨¶ş²æÊ÷
+    *  @function    : createBinaryTree åˆ›å»ºäºŒå‰æ ‘
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/9 19:52
     *  @version  	: ver 1.0
     *  @inparam  	: 
     *  @outparam 	: 
-	*  @description :
+	*  @description : è¾“å…¥æ–¹å¼ï¼šAB##CD##EF##G##
 *****************************************************************************/
 PBTNODE createBinaryTree()
 {
@@ -117,7 +119,7 @@ PBTNODE createBinaryTree()
 		pRoot = (PBTNODE)malloc(sizeof(BTNODE));
 		if (NULL == pRoot)
 		{
-			printf("ÄÚ´æ·ÖÅäÊ§°Ü£¬³ÌĞòÍË³ö..");
+			printf("å†…å­˜åˆ†é…å¤±è´¥ï¼Œç¨‹åºé€€å‡º..");
 			exit(-1);
 		}
 		pRoot->data = value;
@@ -128,19 +130,19 @@ PBTNODE createBinaryTree()
 }
 
 /*****************************************************************************
-    *  @function    : preTraverseBinaryTree ÏÈĞò±éÀú¶ş²æÊ÷
+    *  @function    : preTraverseBinaryTree å…ˆåºéå†äºŒå‰æ ‘
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/7 21:51
     *  @version  	: ver 1.0
-    *  @inparam  	: pRoot Ê÷µÄ¸ù½ÚµãµØÖ·
+    *  @inparam  	: pRoot æ ‘çš„æ ¹èŠ‚ç‚¹åœ°å€
     *  @outparam 	: void
-	*  @description : ÏÈ·ÃÎÊ¸ù½Úµã£¬ÔÙÏÈĞò·ÃÎÊ×ó×ÓÊ÷£¬ÔÙºóĞò·ÃÎÊÓÒ×ÓÊ÷
+	*  @description : å…ˆè®¿é—®æ ¹èŠ‚ç‚¹ï¼Œå†å…ˆåºè®¿é—®å·¦å­æ ‘ï¼Œå†ååºè®¿é—®å³å­æ ‘
 *****************************************************************************/
 void preTraverseBinaryTree(PBTNODE pRoot)
 {
 	if (NULL != pRoot)
 	{
-		//´òÓ¡¸ù½Úµã
+		//æ‰“å°æ ¹èŠ‚ç‚¹
 		printf("%c ",pRoot->data);
 		if (NULL != pRoot->pLeftChild)
 		{
@@ -154,7 +156,7 @@ void preTraverseBinaryTree(PBTNODE pRoot)
 }
 
 /*****************************************************************************
-    *  @function    : inTraverseBinaryTree ÖĞĞò±éÀú
+    *  @function    : inTraverseBinaryTree ä¸­åºéå†
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/8 20:13
     *  @version  	: ver 1.0
@@ -170,7 +172,7 @@ void inTraverseBinaryTree(PBTNODE pRoot)
 		{
 			inTraverseBinaryTree(pRoot->pLeftChild);
 		}
-		//´òÓ¡¸ù½Úµã
+		//æ‰“å°æ ¹èŠ‚ç‚¹
 		printf("%c ",pRoot->data);
 		if (NULL != pRoot->pRightChild)
 		{
@@ -180,7 +182,7 @@ void inTraverseBinaryTree(PBTNODE pRoot)
 }
 
 /*****************************************************************************
-    *  @function    : postTraverseBinaryTree ºóĞò±éÀú¶ş²æÊ÷
+    *  @function    : postTraverseBinaryTree ååºéå†äºŒå‰æ ‘
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/7 21:57
     *  @version  	: ver 1.0
@@ -200,7 +202,7 @@ void postTraverseBinaryTree(PBTNODE pRoot)
 		{
 			postTraverseBinaryTree(pRoot->pRightChild);
 		}
-		//´òÓ¡¸ù½Úµã
+		//æ‰“å°æ ¹èŠ‚ç‚¹
 		printf("%c ",pRoot->data);
 	}
 }
@@ -215,7 +217,7 @@ void levelTraverseBinaryTree(PBTNODE pRoot)
 }
 
 /*****************************************************************************
-    *  @function    : getNodeNum Çó¶ş²æÊ÷½ÚµãµÄ¸öÊı
+    *  @function    : getNodeNum æ±‚äºŒå‰æ ‘èŠ‚ç‚¹çš„ä¸ªæ•°
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/8 20:54
     *  @version  	: ver 1.0
@@ -232,7 +234,7 @@ int getNodeNum(PBTNODE pRoot)
 	return getNodeNum(pRoot->pLeftChild) + getNodeNum(pRoot->pRightChild) + 1;
 }
 /*****************************************************************************
-    *  @function    : getDepth Çó¶ş²æÊ÷µÄÉî¶È
+    *  @function    : getDepth æ±‚äºŒå‰æ ‘çš„æ·±åº¦
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/9 19:50
     *  @version  	: ver 1.0
@@ -254,7 +256,7 @@ int getDepth(PBTNODE pRoot)
 }
 
 /*****************************************************************************
-    *  @function    : getKthLevelNodeNum Çó¶ş²æÊ÷ÖĞµÚk²ã½ÚµãµÄ¸öÊı
+    *  @function    : getKthLevelNodeNum æ±‚äºŒå‰æ ‘ä¸­ç¬¬kå±‚èŠ‚ç‚¹çš„ä¸ªæ•°
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/10 20:35
     *  @version  	: ver 1.0
@@ -264,9 +266,9 @@ int getDepth(PBTNODE pRoot)
 *****************************************************************************/
 int getKthLevelNodeNum(PBTNODE pRoot, int k)
 {
-	int kLeftNum = 0; //¶ş²æÊ÷×ó×ÓÊ÷µÚk²ã½Úµã¸öÊı
-	int kRightNum = 0;//¶ş²æÊ÷ÓÒ×ÓÊ÷µÚk²ã½Úµã¸öÊı
-	if (k < 1) //²ãÊıĞ¡ÓÚ1
+	int kLeftNum = 0; //äºŒå‰æ ‘å·¦å­æ ‘ç¬¬kå±‚èŠ‚ç‚¹ä¸ªæ•°
+	int kRightNum = 0;//äºŒå‰æ ‘å³å­æ ‘ç¬¬kå±‚èŠ‚ç‚¹ä¸ªæ•°
+	if (k < 1) //å±‚æ•°å°äº1
 	{
 		return 0;
 	}
@@ -274,7 +276,7 @@ int getKthLevelNodeNum(PBTNODE pRoot, int k)
 	{
 		return 0;
 	}
-	if (1 == k)//²ãÊıÎª1
+	if (1 == k)//å±‚æ•°ä¸º1
 	{
 		return k;
 	}
@@ -284,18 +286,18 @@ int getKthLevelNodeNum(PBTNODE pRoot, int k)
 }
 
 /*****************************************************************************
-    *  @function    : getLeafNodeNum Çó¶ş²æÊ÷ÖĞÒ¶×Ó½ÚµãµÄ¸öÊı
+    *  @function    : getLeafNodeNum æ±‚äºŒå‰æ ‘ä¸­å¶å­èŠ‚ç‚¹çš„ä¸ªæ•°
     *  @author   	: ZhangLe
     *  @date     	: 2014/11/10 20:54
     *  @version  	: ver 1.0
     *  @inparam  	: 
     *  @outparam 	: 
-	*  @description : ¶ÈÎª0µÄ½Úµã±»³ÆÎªÒ¶×Ó½Úµã
+	*  @description : åº¦ä¸º0çš„èŠ‚ç‚¹è¢«ç§°ä¸ºå¶å­èŠ‚ç‚¹
 *****************************************************************************/
 int getLeafNodeNum(PBTNODE pRoot)
 {
-	int leftLeafNodeNum = 0;   //×ó±ßÒ¶×Ó½Úµã¸öÊı
-	int rightLeafNodeNum = 0;  //ÓÒ±ßÒ¶×Ó½Úµã¸öÊı
+	int leftLeafNodeNum = 0;   //å·¦è¾¹å¶å­èŠ‚ç‚¹ä¸ªæ•°
+	int rightLeafNodeNum = 0;  //å³è¾¹å¶å­èŠ‚ç‚¹ä¸ªæ•°
 	if (NULL == pRoot)
 	{
 		return 0;
@@ -304,7 +306,7 @@ int getLeafNodeNum(PBTNODE pRoot)
 	{
 		return 1;
 	}
-	leftLeafNodeNum = getLeafNodeNum(pRoot->pLeftChild);	//×ó×ÓÊ÷ÖĞÒ¶×Ó½ÚµãµÄ¸öÊı
-	rightLeafNodeNum = getLeafNodeNum(pRoot->pRightChild);	//ÓÒ×ÓÊ÷ÖĞÒ¶×Ó½ÚµãµÄ¸öÊı
+	leftLeafNodeNum = getLeafNodeNum(pRoot->pLeftChild);	//å·¦å­æ ‘ä¸­å¶å­èŠ‚ç‚¹çš„ä¸ªæ•°
+	rightLeafNodeNum = getLeafNodeNum(pRoot->pRightChild);	//å³å­æ ‘ä¸­å¶å­èŠ‚ç‚¹çš„ä¸ªæ•°
 	return leftLeafNodeNum + rightLeafNodeNum;
 }
