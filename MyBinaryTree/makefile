@@ -1,5 +1,6 @@
 .PHONY: clean all
 CC=gcc
+CXX=g++
 CFLAGS=-Wall -g
 BIN= MyBinaryTree
 

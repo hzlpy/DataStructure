@@ -1,5 +1,4 @@
 #include <stdio.h>
-//#include <malloc.h>
 #include <stdlib.h>
 
 typedef struct BTNode
@@ -54,6 +53,7 @@ int main(void)
 	printf("postTraverseBinaryTree： \n");
 	postTraverseBinaryTree(pTree);
 	printf("\n");
+
 	printf("The number of nodes in binary tree is %d.\n",getNodeNum(pTree));
 	printf("The depth of binary tree is %d.\n",getDepth(pTree));
 	int k = 3;
@@ -207,13 +207,18 @@ void postTraverseBinaryTree(PBTNODE pRoot)
 	}
 }
 
+/*****************************************************************************
+    *  @function    : levelTraverseBinaryTree 层序遍历二叉树
+    *  @author   	: happy.zhang
+    *  @date     	: 2017/9/10 16:49
+    *  @version  	: ver 1.0
+    *  @inparam  	: 
+    *  @outparam 	: 
+	*  @description :
+*****************************************************************************/
 void levelTraverseBinaryTree(PBTNODE pRoot)
 {
-// 	if (NULL == pRoot)
-// 	{
-// 		return;
-// 	}
-// 	queue<PBTNODE> q;
+	
 }
 
 /*****************************************************************************
