@@ -35,6 +35,7 @@
   
 ### 参考
 
-  [1]: http://zh.wikipedia.org/wiki/%E6%A0%91_%28%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%29#.E6.9E.84.E9.80.A0.E7.A9.BA.E6.A0.91
-  [2]: [轻松搞定面试中的二叉树题目](http://blog.csdn.net/luckyxiaoqiang/article/details/7518888#topic1)
-  [3]: [数据结构：二叉树的链式存储](http://www.cnblogs.com/MrSaver/p/6059918.html)
+  1. http://zh.wikipedia.org/wiki/%E6%A0%91_%28%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%29#.E6.9E.84.E9.80.A0.E7.A9.BA.E6.A0.91
+  2. [轻松搞定面试中的二叉树题目](http://blog.csdn.net/luckyxiaoqiang/article/details/7518888#topic1)
+  3. [数据结构：二叉树的链式存储](http://www.cnblogs.com/MrSaver/p/6059918.html)
+  4. http://student.zjzk.cn/course_ware/data_structure/web/main.htm
