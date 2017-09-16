@@ -1,30 +1,29 @@
-//  [10/13/2014 Happy]
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
+
 typedef enum _bool
 {
 	false = 0,
 	true = 1
 }bool;
 
-//¶¨Òå½á¹¹Ìå
+// å®šä¹‰ç»“æž„ä½“
 struct Array
 {
 	int * pBase;
 	int length;
-	int count;//ÓÐÐ§ÔªËØµÄ¸öÊý
+	int count;		// æœ‰æ•ˆå…ƒç´ çš„ä¸ªæ•°
 };
 
-//ÉùÃ÷º¯Êý
+// å£°æ˜Žå‡½æ•°
 void init(struct Array *pArray, int length);
 void print(struct Array *pArray);
 void append(struct Array *pArray, int value);
-void insert(struct Array *pArray, int index, int value);//positionÖ¸¶¨´ý²åÈëÔªËØµÄË÷Òý£¬ÔªËØ²åÈë³É¹¦ºó£¬index¶ÔÓ¦µÄÔªËØÒÔºóµÄÔªËØÒÀ´ËºóÒÆÒ»Î»
+void insert(struct Array *pArray, int index, int value);//positionæŒ‡å®šå¾…æ’å…¥å…ƒç´ çš„ç´¢å¼•ï¼Œå…ƒç´ æ’å…¥æˆåŠŸåŽï¼Œindexå¯¹åº”çš„å…ƒç´ ä»¥åŽçš„å…ƒç´ ä¾æ­¤åŽç§»ä¸€ä½
 int length();
 bool isEmpty(struct Array *pArray);
 bool isFull(struct Array *pArray);
+
 int main(void)
 {
 	struct Array pArr;
@@ -40,7 +39,7 @@ int main(void)
 	print(&pArr);
 }
 /*****************************************************************************
-    *  @brief    : init ³õÊ¼»¯Êý×é
+    *  @brief    : init åˆå§‹åŒ–æ•°ç»„
     *  @author   : Zhangle
     *  @date     : 2014/10/18 16:15
     *  @version  : ver 1.0
@@ -49,11 +48,11 @@ int main(void)
 *****************************************************************************/
 void init(struct Array *pArray, int length)
 {
-	//¶¯Ì¬·ÖÅäÄÚ´æ
+	//åŠ¨æ€åˆ†é…å†…å­˜
 	pArray->pBase = (int *)malloc(sizeof(int)*length);
 	if (NULL == pArray->pBase)
 	{
-		printf("¶¯Ì¬·ÖÅäÄÚ´æÊ§°Ü..\n");
+		printf("åŠ¨æ€åˆ†é…å†…å­˜å¤±è´¥..\n");
 		exit(-1);
 	} 
 	else
@@ -64,7 +63,7 @@ void init(struct Array *pArray, int length)
 	return;
 }
 /*****************************************************************************
-    *  @brief    : isEmpty ÅÐ¶ÏÊý×éÊ±ºòÎª¿Õ
+    *  @brief    : isEmpty åˆ¤æ–­æ•°ç»„æ—¶å€™ä¸ºç©º
     *  @author   : Zhangle
     *  @date     : 2014/10/18 16:15
     *  @version  : ver 1.0
@@ -73,7 +72,7 @@ void init(struct Array *pArray, int length)
 *****************************************************************************/
 bool isEmpty(struct Array *pArray)
 {
-	if (pArray->count == 0)//Êý×éÖÐÓÐÐ§ÔªËØ¸öÊýÎª0£¬Êý×éÎª¿Õ£¬·µ»Øtrue
+	if (pArray->count == 0)		// æ•°ç»„ä¸­æœ‰æ•ˆå…ƒç´ ä¸ªæ•°ä¸º 0ï¼Œæ•°ç»„ä¸ºç©ºï¼Œè¿”å›ž true
 	{
 		return true;
 	} 
@@ -83,7 +82,7 @@ bool isEmpty(struct Array *pArray)
 	}
 }
 /*****************************************************************************
-    *  @brief    : isFull ÅÐ¶ÏÊý×éÊÇ·ñÒÑÂú
+    *  @brief    : isFull åˆ¤æ–­æ•°ç»„æ˜¯å¦å·²æ»¡
     *  @author   : Zhangle
     *  @date     : 2014/10/18 16:15
     *  @version  : ver 1.0
@@ -92,7 +91,7 @@ bool isEmpty(struct Array *pArray)
 *****************************************************************************/
 bool isFull(struct Array *pArray)
 {
-	//ÅÐ¶ÏcountÓëlengthµÄ´óÐ¡
+	//åˆ¤æ–­countä¸Žlengthçš„å¤§å°
 	if (pArray->count >= pArray->length)
 	{
 		return true;
@@ -103,7 +102,7 @@ bool isFull(struct Array *pArray)
 	}
 }
 /*****************************************************************************
-    *  @brief    : print ´òÓ¡Êý×é
+    *  @brief    : print æ‰“å°æ•°ç»„
     *  @author   : Zhangle
     *  @date     : 2014/10/18 16:15
     *  @version  : ver 1.0
@@ -128,7 +127,7 @@ void print(struct Array *pArray)
 }
 
 /*****************************************************************************
-    *  @brief    : append ÎªÊý×é×·¼ÓÔªËØ
+    *  @brief    : append ä¸ºæ•°ç»„è¿½åŠ å…ƒç´ 
     *  @author   : Zhangle
     *  @date     : 2014/10/18 16:16
     *  @version  : ver 1.0
@@ -137,12 +136,12 @@ void print(struct Array *pArray)
 *****************************************************************************/
 void append(struct Array *pArray, int value)
 {
-	//×·¼ÓÔªËØÇ°ÏÈÅÐ¶ÏcountÓëlengthµÄ´óÐ¡
+	//è¿½åŠ å…ƒç´ å‰å…ˆåˆ¤æ–­countä¸Žlengthçš„å¤§å°
 	if (isFull(pArray))
 	{
-		//Êý×éÒÑÂú£¬ÇëÎªËü·ÖÅäÐÂµÄÄÚ´æ
+		//æ•°ç»„å·²æ»¡ï¼Œè¯·ä¸ºå®ƒåˆ†é…æ–°çš„å†…å­˜
 	} 
-	else //×·¼ÓÔªËØ
+	else //è¿½åŠ å…ƒç´ 
 	{
 		pArray->pBase[pArray->count] = value;
 		pArray->count ++;
@@ -155,28 +154,28 @@ void append(struct Array *pArray, int value)
     *  @date     : 2014/10/18 16:16
     *  @version  : ver 1.0
     *  @inparam  : pArray
-	*  @inparam  : index Ö¸¶¨´ý²åÈëÔªËØµÄË÷Òý£¬ÔªËØ²åÈë³É¹¦ºó£¬index¶ÔÓ¦ÔªËØºóµÄÔªËØÒÀ´ÎºóÒÆÒ»Î»
-	*  @inparam  : value ´ý²åÈëµÄÖµ
+	*  @inparam  : index æŒ‡å®šå¾…æ’å…¥å…ƒç´ çš„ç´¢å¼•ï¼Œå…ƒç´ æ’å…¥æˆåŠŸåŽï¼Œindexå¯¹åº”å…ƒç´ åŽçš„å…ƒç´ ä¾æ¬¡åŽç§»ä¸€ä½
+	*  @inparam  : value å¾…æ’å…¥çš„å€¼
     *  @outparam :  
 *****************************************************************************/
 void insert(struct Array *pArray, int index, int value)
 {
 	int i = 0;
-	//²åÈëÔªËØÇ°ÏÈÅÐ¶ÏcountÓëlengthµÄ´óÐ¡
+	//æ’å…¥å…ƒç´ å‰å…ˆåˆ¤æ–­countä¸Žlengthçš„å¤§å°
 	if (isFull(pArray))
 	{
 		printf("insert error. \n");
 	} 
 	else
 	{
-		//ÏÈ½«index¶ÔÓ¦ÔªËØºóµÄÔªËØÒÀ´ÎºóÒÆÒ»Î»
+		// å…ˆå°†indexå¯¹åº”å…ƒç´ åŽçš„å…ƒç´ ä¾æ¬¡åŽç§» 1 ä½
 		for (i=pArray->length-1; i>index; i--)
 		{
 			pArray->pBase[i] = pArray->pBase[i-1];
 		}
-		//ÔÚindex´¦²åÈëÔªËØ
+		// åœ¨indexå¤„æ’å…¥å…ƒç´ 
 		pArray->pBase[index] = value;
-		//²åÈëºócount¼Ó1
+		// æ’å…¥åŽ count åŠ  1
 		pArray->count++;
 	}
 }
