@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <malloc.h>
 #include <stdlib.h>
 //定义节点
 typedef struct node{
@@ -288,7 +287,7 @@ int isLoop(LinkList *pHeadNode) {
 	slow = fast = pHeadNode;
 	//quick每次移动两步，slow每次移动一步
 	//当quick到达最后一个结点时，slow便指向中间结点
-	while ((fast->pNext !=NULL) && (fast->pNext->pNext != NULL)) {
+	while ((fast->pNext != NULL) && (fast->pNext->pNext != NULL)) {
 		fast = fast->pNext->pNext;
 		slow = slow->pNext;
 		if (fast == slow) {
@@ -336,7 +335,7 @@ int main()
 	PNODE pHeadNode = createLinkedList();
 	int len = length(pHeadNode);
 	PNODE pReverseHead;
-	int index,value, k;
+	int index, value, k;
 	printf("len = %d\n", len);
 	traverse(pHeadNode);
 	//pReverseHead = reverse(pHeadNode);

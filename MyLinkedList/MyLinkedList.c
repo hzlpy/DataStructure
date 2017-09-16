@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <malloc.h>
 #include <stdlib.h>
 typedef struct node
 {
-	struct node *pNext;//Ö¸ÕëÓò
-	int value;//Êı¾İÓò
+	struct node *pNext;//æŒ‡é’ˆåŸŸ
+	int value;//æ•°æ®åŸŸ
 }NODE, *PNODE;
 
 typedef enum _bool
@@ -12,61 +11,60 @@ typedef enum _bool
 	false,true
 }bool;
 
-//º¯ÊıÉùÃ÷
-/*Î²²å·¨´´½¨Á´±í*/
+//å‡½æ•°å£°æ˜
+/*å°¾æ’æ³•åˆ›å»ºé“¾è¡¨*/
 PNODE createLinkedList();
-/*Í·²å·¨´´½¨Á´±í*/
+/*å¤´æ’æ³•åˆ›å»ºé“¾è¡¨*/
 PNODE createLinkedList2();
-/*±éÀúÁ´±í*/
+/*éå†é“¾è¡¨*/
 void traverseLinkedList(PNODE pHeadNode);
-// /*É¾³ı½Úµã*/
+// /*åˆ é™¤èŠ‚ç‚¹*/
 // bool deleteNode(PNODE pHeadNode, int index);
-/*É¾³ı½Úµã*/
+/*åˆ é™¤èŠ‚ç‚¹*/
 bool deleteNode(PNODE pHeadNode, int index, int *value);
-/*Ìí¼Ó½Úµã*/
+/*æ·»åŠ èŠ‚ç‚¹*/
 bool insertNode(PNODE pHeadNode, int index, int value);
-/*ÅĞ¶ÏÁ´±íÊ±ºòÎª¿Õ*/
+/*åˆ¤æ–­é“¾è¡¨æ—¶å€™ä¸ºç©º*/
 bool isEmpty(PNODE pHeadNode);
-/*Á´±í³¤¶È*/
+/*é“¾è¡¨é•¿åº¦*/
 int length(PNODE pHeadNode);
-/*Ã°ÅİÅÅĞò*/
+/*å†’æ³¡æ’åº*/
 void bubbleSort(PNODE pHeadNode);
-/*·´×ªµ¥Á´±í*/
+/*åè½¬å•é“¾è¡¨*/
 PNODE reverse(PNODE pHeadNode);
-/*·´×ªµ¥Á´±í2*/
+/*åè½¬å•é“¾è¡¨2*/
 PNODE reverse2(PNODE pHeadNode);
 int main(void)
 {
-	int d_value;
 	PNODE pReverseNode;
-	//´´½¨Á´±í
+	//åˆ›å»ºé“¾è¡¨
 	//PNODE pHeadNode = createLinkedList();
 	PNODE pHeadNode = createLinkedList();
 
-	//Á´±íµÄ³¤¶È
- 	printf("Á´±í³¤¶ÈÎª %d \n",length(pHeadNode));
-	//±éÀúÁ´±í
+	//é“¾è¡¨çš„é•¿åº¦
+ 	printf("é“¾è¡¨é•¿åº¦ä¸º %d \n",length(pHeadNode));
+	//éå†é“¾è¡¨
 	traverseLinkedList(pHeadNode);
 
 	pReverseNode = reverse2(pHeadNode);
 	traverseLinkedList(pReverseNode);
 
-//  	//ÅÅĞò
+//  	//æ’åº
 // 	bubbleSort(pHeadNode);
 // 	traverseLinkedList(pHeadNode);
 
-// 	//Ìí¼Ó½Úµã
+// 	//æ·»åŠ èŠ‚ç‚¹
 // 	insertNode(pHeadNode,4,100);
 // 	traverseLinkedList(pHeadNode);
-// 	//É¾³ı½Úµã
+// 	//åˆ é™¤èŠ‚ç‚¹
 // 	deleteNode(pHeadNode,4,&d_value);
 // 	traverseLinkedList(pHeadNode);
-// 	printf("±»É¾³ıµÄÊı×ÖÊÇ %d \n",d_value);
+// 	printf("è¢«åˆ é™¤çš„æ•°å­—æ˜¯ %d \n",d_value);
 
 }
 
 /*****************************************************************************
-    * @function    	: createLinkedList ´´½¨Ò»¸öµ¥Á´±í
+    * @function    	: createLinkedList åˆ›å»ºä¸€ä¸ªå•é“¾è¡¨
     * @author   	: ZhangLe
     * @date     	: 2014/11/11 21:21
     * @version  	: ver 2.0
@@ -79,43 +77,43 @@ PNODE createLinkedList()
 	int i;
 	int length;
 	int value;
-	//ÎªÍ·½ÚµãÉêÇëÄÚ´æ¿Õ¼ä
+	//ä¸ºå¤´èŠ‚ç‚¹ç”³è¯·å†…å­˜ç©ºé—´
 	PNODE pHeadNode = (PNODE)malloc(sizeof(NODE));
-	//Î²½Úµã
+	//å°¾èŠ‚ç‚¹
 	PNODE pTailNode = pHeadNode;
 	pTailNode->pNext = NULL;
-	//ÅĞ¶ÏÄÚ´æÉêÇëÊÇ·ñ³É¹¦
+	//åˆ¤æ–­å†…å­˜ç”³è¯·æ˜¯å¦æˆåŠŸ
 	if (NULL == pHeadNode)
 	{
-		printf("ÄÚ´æÉêÇëÊ§°Ü£¬ÍË³ö³ÌĞò¡£\n");
+		printf("å†…å­˜ç”³è¯·å¤±è´¥ï¼Œé€€å‡ºç¨‹åºã€‚\n");
 		exit(-1);
 	}
-	//ÊäÈëÁ´±íµÄ³¤¶È£¬¼´½ÚµãµÄ¸öÊı
-	printf("ÇëÊä³öÁ´±íµÄ³¤¶È: ");
+	//è¾“å…¥é“¾è¡¨çš„é•¿åº¦ï¼Œå³èŠ‚ç‚¹çš„ä¸ªæ•°
+	printf("è¯·è¾“å‡ºé“¾è¡¨çš„é•¿åº¦: ");
 	scanf("%d",&length);
-	//ÀûÓÃÑ­»·Ìí¼Ó½Úµã
+	//åˆ©ç”¨å¾ªç¯æ·»åŠ èŠ‚ç‚¹
 	for (i=0; i<length; ++i)
 	{
-		//ÉêÇëÒ»¸öĞÂµÄ½Úµã
+		//ç”³è¯·ä¸€ä¸ªæ–°çš„èŠ‚ç‚¹
 		PNODE pNewNode = (PNODE)malloc(sizeof(NODE));
-		//ÅĞ¶ÏÄÚ´æÉêÇëÊÇ·ñ³É¹¦
+		//åˆ¤æ–­å†…å­˜ç”³è¯·æ˜¯å¦æˆåŠŸ
 		if (NULL == pNewNode)
 		{
-			printf("ÄÚ´æÉêÇëÊ§°Ü£¬ÍË³ö³ÌĞò¡£\n");
+			printf("å†…å­˜ç”³è¯·å¤±è´¥ï¼Œé€€å‡ºç¨‹åºã€‚\n");
 			exit(-1);
 		}
-		printf("ÇëÊäÈëµÚ%d¸ö½ÚµãµÄÖµ = ",i+1);
+		printf("è¯·è¾“å…¥ç¬¬ %d ä¸ªèŠ‚ç‚¹çš„å€¼ = ",i+1);
 		scanf("%d",&value);
 		pNewNode->value = value;
-		pTailNode->pNext = pNewNode;//pTailNode,pHeadNodeÏÂÒ»¸ö½ÚµãµØÖ·Ö¸ÏòpNewNode
+		pTailNode->pNext = pNewNode;	// pTailNode, pHeadNodeä¸‹ä¸€ä¸ªèŠ‚ç‚¹åœ°å€æŒ‡å‘pNewNode
 		pNewNode->pNext = NULL;
-		pTailNode = pNewNode;//½«pNewNodeÖ¸¶¨ÎªpTailNode,pHeadNode->pNextÖ¸ÏòpNewNode£¬ÏÖÔÚÒ²Ö¸ÏòpTailNode
+		pTailNode = pNewNode;			// å°† pNewNode æŒ‡å®šä¸º pTailNode, pHeadNode->pNext æŒ‡å‘ pNewNodeï¼Œç°åœ¨ä¹ŸæŒ‡å‘ pTailNode
 	}
 	return pHeadNode;
 }
 
 /*****************************************************************************
-    * @function    	: createLinkedList2 ÀûÓÃÍ·²å·¨´´½¨µ¥Á´±í
+    * @function    	: createLinkedList2 åˆ©ç”¨å¤´æ’æ³•åˆ›å»ºå•é“¾è¡¨
     * @author   	: ZhangLe
     * @date     	: 2014/11/11 21:34
     * @version  	: ver 1.0
@@ -124,33 +122,33 @@ PNODE createLinkedList()
 *****************************************************************************/
 PNODE createLinkedList2()
 {
-	//ÉùÃ÷Í·½Úµã£¬²¢ÎªËü¶¯Ì¬·ÖÅäÄÚ´æ
+	//å£°æ˜å¤´èŠ‚ç‚¹ï¼Œå¹¶ä¸ºå®ƒåŠ¨æ€åˆ†é…å†…å­˜
 	PNODE pHead = (PNODE)malloc(sizeof(NODE));
-	int length; //´ı´´½¨Á´±íµÄ³¤¶È
-	int data;   //½ÚµãµÄÖµ
-	int i;      //Ñ­»·±äÁ¿
+	int length; //å¾…åˆ›å»ºé“¾è¡¨çš„é•¿åº¦
+	int data;   //èŠ‚ç‚¹çš„å€¼
+	int i;      //å¾ªç¯å˜é‡
 	PNODE pNew;
-	//¼ì²éÄÚ´æÊÇ·ñ·ÖÅä³É¹¦
+	//æ£€æŸ¥å†…å­˜æ˜¯å¦åˆ†é…æˆåŠŸ
 	if (NULL == pHead)
 	{
-		printf("¶¯Ì¬·ÖÅäÄÚ´æÊ§°Ü£¬³ÌĞòÍË³ö¡£\n");
+		printf("åŠ¨æ€åˆ†é…å†…å­˜å¤±è´¥ï¼Œç¨‹åºé€€å‡ºã€‚\n");
 		exit(-1);
 	}
-	pHead->pNext = NULL; //³õÊ¼»¯Îª¿ÕÁ´±í
-	//ÄÚ´æ·ÖÅä³É¹¦£¬¿ªÊ¼Í·²å·¨´´½¨Á´±í
+	pHead->pNext = NULL; //åˆå§‹åŒ–ä¸ºç©ºé“¾è¡¨
+	//å†…å­˜åˆ†é…æˆåŠŸï¼Œå¼€å§‹å¤´æ’æ³•åˆ›å»ºé“¾è¡¨
 	printf("Please input the length of linked list you want to create: ");
 	scanf("%d",&length);
 	for (i=0; i<length; ++i)
 	{
-		//ÎªĞÂ½Úµã·ÖÅäÄÚ´æ
+		//ä¸ºæ–°èŠ‚ç‚¹åˆ†é…å†…å­˜
 		pNew = (PNODE)malloc(sizeof(NODE));
-		//¼ì²éÄÚ´æÊÇ·ñ·ÖÅä³É¹¦
+		//æ£€æŸ¥å†…å­˜æ˜¯å¦åˆ†é…æˆåŠŸ
 		if (NULL == pNew)
 		{
-			printf("¶¯Ì¬·ÖÅäÄÚ´æÊ§°Ü£¬³ÌĞòÍË³ö¡£\n");
+			printf("åŠ¨æ€åˆ†é…å†…å­˜å¤±è´¥ï¼Œç¨‹åºé€€å‡ºã€‚\n");
 			exit(-1);
 		}
-		//ÄÚ´æ·ÖÅä³É¹¦£¬ÌáÊ¾ÎªĞÂ½ÚµãÊäÈëÖµ
+		//å†…å­˜åˆ†é…æˆåŠŸï¼Œæç¤ºä¸ºæ–°èŠ‚ç‚¹è¾“å…¥å€¼
 		printf("Please input a value for new node: ");
 		scanf("%d", &data);
 		pNew->value = data;
@@ -161,7 +159,7 @@ PNODE createLinkedList2()
 }
 
 /*****************************************************************************
-    *  @brief    : traverseLinkedList ±éÀúµ¥Á´±í
+    *  @brief    : traverseLinkedList éå†å•é“¾è¡¨
     *  @author   : Zhangle
     *  @date     : 2014/10/19 10:19
     *  @version  : ver 1.0
@@ -171,7 +169,7 @@ PNODE createLinkedList2()
 void traverseLinkedList(PNODE pHeadNode)
 {
 	PNODE p = pHeadNode->pNext;
-	printf("¿ªÊ¼±éÀúÁ´±í\n");
+	printf("å¼€å§‹éå†é“¾è¡¨\n");
 	while(NULL != p)
 	{
 		printf("%d ",p->value);
@@ -180,7 +178,7 @@ void traverseLinkedList(PNODE pHeadNode)
 	printf("\n");
 }
 /*****************************************************************************
-    *  @brief    : isEmpty ÅĞ¶ÏÁ´±íÊ±ºòÎª¿Õ
+    *  @brief    : isEmpty åˆ¤æ–­é“¾è¡¨æ—¶å€™ä¸ºç©º
     *  @author   : Zhangle
     *  @date     : 2014/10/19 10:36
     *  @version  : ver 1.0
@@ -196,7 +194,7 @@ bool isEmpty(PNODE pHeadNode)
 	return false;
 }
 /*****************************************************************************
-    *  @brief    : length »ñÈ¡Á´±í³¤¶È
+    *  @brief    : length è·å–é“¾è¡¨é•¿åº¦
     *  @author   : Zhangle
     *  @date     : 2014/10/19 10:39
     *  @version  : ver 1.0
@@ -215,7 +213,7 @@ int length(PNODE pHeadNode)
 	return len;
 }
 /*****************************************************************************
-    *  @brief    : bubbleSort ¶ÔÁ´±í½øĞĞÃ°ÅİÅÅĞò
+    *  @brief    : bubbleSort å¯¹é“¾è¡¨è¿›è¡Œå†’æ³¡æ’åº
     *  @author   : Zhangle
     *  @date     : 2014/10/19 10:47
     *  @version  : ver 1.0
@@ -224,7 +222,7 @@ int length(PNODE pHeadNode)
 *****************************************************************************/
 void bubbleSort(PNODE pHeadNode)
 {
-	int len;//Á´±í³¤¶È
+	int len;//é“¾è¡¨é•¿åº¦
 	int i,j,temp;
 	PNODE p,q;
 	p = pHeadNode->pNext;
@@ -235,7 +233,7 @@ void bubbleSort(PNODE pHeadNode)
 		{
 			if(p->value > q->value)
 			{
-				//½»»»
+				//äº¤æ¢
 				temp = q->value;
 				q->value = p->value;
 				p->value = temp;
@@ -245,7 +243,7 @@ void bubbleSort(PNODE pHeadNode)
 	return;
 }
 /*****************************************************************************
-    *  @brief    : insertNode ÏòpHeadNodeÖ¸ÏòµÄÁ´±íÖĞµÚindexÇ°²åÈë½Úµã¡£´ı²åÈë½ÚµãÖµÎªvalue¡£Á´±íÖĞµÚÒ»¸ö½ÚµãµÄË÷ÒıÖµÎª1¡£
+    *  @brief    : insertNode å‘pHeadNodeæŒ‡å‘çš„é“¾è¡¨ä¸­ç¬¬indexå‰æ’å…¥èŠ‚ç‚¹ã€‚å¾…æ’å…¥èŠ‚ç‚¹å€¼ä¸ºvalueã€‚é“¾è¡¨ä¸­ç¬¬ä¸€ä¸ªèŠ‚ç‚¹çš„ç´¢å¼•å€¼ä¸º1ã€‚
     *  @author   : Zhangle
     *  @date     : 2014/10/19 11:56
     *  @version  : ver 1.0
@@ -256,7 +254,7 @@ bool insertNode(PNODE pHeadNode, int index, int value)
 {
 	int i = 0;
 	PNODE p = pHeadNode;
-	//ÎªĞÂ½Úµã¶¯Ì¬·ÖÅäÄÚ´æ
+	//ä¸ºæ–°èŠ‚ç‚¹åŠ¨æ€åˆ†é…å†…å­˜
 	PNODE pNew = (PNODE)malloc(sizeof(NODE));
 	PNODE q;
 	while(NULL != p && i<index-1)
@@ -280,7 +278,7 @@ bool insertNode(PNODE pHeadNode, int index, int value)
 }
 
 /*****************************************************************************
-    *  @brief    : deleteNode É¾³ıpHeadNodeÖ¸ÏòµÄÁ´±íµÄµÚindex¸ö½Úµã¡£Á´±íÖĞ½Úµã´Ó1¿ªÊ¼¼ÆÊı¡£
+    *  @brief    : deleteNode åˆ é™¤pHeadNodeæŒ‡å‘çš„é“¾è¡¨çš„ç¬¬indexä¸ªèŠ‚ç‚¹ã€‚é“¾è¡¨ä¸­èŠ‚ç‚¹ä»1å¼€å§‹è®¡æ•°ã€‚
     *  @author   : Zhangle
     *  @date     : 2014/10/19 12:11
     *  @version  : ver 1.0
@@ -301,7 +299,7 @@ bool insertNode(PNODE pHeadNode, int index, int value)
 // 	{
 // 		return false;
 // 	}
-// 	q = p->pNext;//´ıÉ¾³ıµÄ½ÚµãµÄµØÖ·
+// 	q = p->pNext;//å¾…åˆ é™¤çš„èŠ‚ç‚¹çš„åœ°å€
 // 	p->pNext = q->pNext;
 // 	free(q);
 // 	q = NULL;
@@ -321,7 +319,7 @@ bool deleteNode(PNODE pHeadNode, int index, int *val)
 	{
 		return false;
 	}
-	q = p->pNext;//´ıÉ¾³ıµÄ½ÚµãµÄµØÖ·
+	q = p->pNext;//å¾…åˆ é™¤çš„èŠ‚ç‚¹çš„åœ°å€
 	*val = q->value;
 	p->pNext = q->pNext;
 	free(q);
@@ -330,13 +328,13 @@ bool deleteNode(PNODE pHeadNode, int index, int *val)
 }
 
 /*
- * @function    : reverse µ¥Á´±í·´×ª
+ * @function    : reverse å•é“¾è¡¨åè½¬
  * @author   	: ZhangLe
  * @date     	: 2014/11/12 21:09
  * @version  	: ver 1.0
- * @inparam  	: pHeadNode ±»·´×ªµÄµ¥Á´±íµÄÍ·½Úµã
- * @outparam    : pReverseHead ·´×ªºóµ¥Á´±íµÄÍ·½Úµã
- * @description : ´´½¨Ò»¸öĞÂµÄµ¥Á´±í£¬´Ó±»·´×ªµÄÁ´±íÖĞÒÀ´ÎÈ¡³ö½Úµã·Åµ½ĞÂµÄµ¥Á´±íÖĞ£¬ÀàËÆÍ·²å·¨
+ * @inparam  	: pHeadNode è¢«åè½¬çš„å•é“¾è¡¨çš„å¤´èŠ‚ç‚¹
+ * @outparam    : pReverseHead åè½¬åå•é“¾è¡¨çš„å¤´èŠ‚ç‚¹
+ * @description : åˆ›å»ºä¸€ä¸ªæ–°çš„å•é“¾è¡¨ï¼Œä»è¢«åè½¬çš„é“¾è¡¨ä¸­ä¾æ¬¡å–å‡ºèŠ‚ç‚¹æ”¾åˆ°æ–°çš„å•é“¾è¡¨ä¸­ï¼Œç±»ä¼¼å¤´æ’æ³•
  */
 PNODE reverse(PNODE pHeadNode)
 {
@@ -348,21 +346,21 @@ PNODE reverse(PNODE pHeadNode)
 	{
 		return NULL;
 	}
-	//¶¯Ì¬·ÖÅäÄÚ´æ
+	//åŠ¨æ€åˆ†é…å†…å­˜
 	pReverseHead = (PNODE)malloc(sizeof(NODE));
 	pReverseHead->pNext = NULL;
-	//¼ì²éÄÚ´æÊÇ·ñ·ÖÅä³É¹¦
+	//æ£€æŸ¥å†…å­˜æ˜¯å¦åˆ†é…æˆåŠŸ
 	if (NULL == pReverseHead)
 	{
-		printf("ÄÚ´æ·ÖÅäÊ§°Ü£¬³ÌĞòÍË³ö");
+		printf("å†…å­˜åˆ†é…å¤±è´¥ï¼Œç¨‹åºé€€å‡º");
 		exit(-1);
 	}
 	pCurrNode = pHeadNode->pNext;
-	while (NULL != pCurrNode)				//Èç¹ûµ±Ç°½Úµã²»Îª¿Õ
+	while (NULL != pCurrNode)				//å¦‚æœå½“å‰èŠ‚ç‚¹ä¸ä¸ºç©º
 	{
-		pTemp = pReverseHead->pNext;		//±£´æpReverseHeadÖĞµÄºóĞø½Úµã
-		pReverseHead->pNext = pCurrNode;	//½«pHeadNodeÖĞµÄµ±Ç°½ÚµãpCurrNode·Åµ½pReverseHeadÖĞ
-		pCurrNode = pCurrNode->pNext;		//µ±Ç°½ÚµãpCurrNodeÖ¸ÏòÏÂÒ»¸ö½Úµã
+		pTemp = pReverseHead->pNext;		//ä¿å­˜pReverseHeadä¸­çš„åç»­èŠ‚ç‚¹
+		pReverseHead->pNext = pCurrNode;	//å°†pHeadNodeä¸­çš„å½“å‰èŠ‚ç‚¹pCurrNodeæ”¾åˆ°pReverseHeadä¸­
+		pCurrNode = pCurrNode->pNext;		//å½“å‰èŠ‚ç‚¹pCurrNodeæŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
 		pReverseHead->pNext->pNext = pTemp; //
 	}
 	return pReverseHead;
@@ -386,12 +384,32 @@ PNODE reverse2(PNODE pHeadNode)
 		return NULL;
 	}
 	pCurrNode = pHeadNode->pNext;
-	while (NULL != pCurrNode->pNext)				//pTempNodeÓëpCurrNode½øĞĞ½»»»
+	while (NULL != pCurrNode->pNext)				//pTempNodeä¸pCurrNodeè¿›è¡Œäº¤æ¢
 	{	
-		pTempNode = pCurrNode->pNext;		        //pTempNodeÊÇpCurrNodeµÄºóĞø½Úµã
+		pTempNode = pCurrNode->pNext;		        //pTempNodeæ˜¯pCurrNodeçš„åç»­èŠ‚ç‚¹
 		pCurrNode->pNext = pTempNode->pNext;			
 		pTempNode->pNext = pHeadNode->pNext;
 		pHeadNode->pNext = pTempNode;
 	}
 	return pHeadNode;
+}
+
+PNODE getLastKthNode(PNODE pHeadNode, int k)
+{
+	if (pHeadNode == NULL || k <= 0)
+	{
+		return NULL;
+	}
+	PNODE p1, p2;
+	p1 = p2 = pHeadNode;
+	int i=0;
+	for (i=0; i<k; i++) 
+	{
+		p1 = p1->pNext;
+	}
+	while (p1 != NULL) {
+		p1 = p1->pNext;
+		p2 = p2->pNext;
+	}
+	return p2;
 }
