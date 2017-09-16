@@ -1,31 +1,31 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define StackSize 10 //¼Ù¶¨Ô¤·ÖÅäµÄÕ»¿Õ¼ä×î¶àÎªStackSize¸öÔªËØ
-typedef char DataType;//¼Ù¶¨Õ»ÔªËØµÄÊý¾ÝÀàÐÍÎª×Ö·û
+#define StackSize 10 //å‡å®šé¢„åˆ†é…çš„æ ˆç©ºé—´æœ€å¤šä¸ºStackSizeä¸ªå…ƒç´ 
+typedef char DataType;//å‡å®šæ ˆå…ƒç´ çš„æ•°æ®ç±»åž‹ä¸ºå­—ç¬¦
 typedef enum
 {
 	false,true
 }bool;
 
-//½á¹¹Ìå¶¨Òå
+//ç»“æž„ä½“å®šä¹‰
 typedef struct SeqStack
 {
 	DataType data[StackSize];
 	int top;
 }SEQSTACK, *PSEQSTACK;
 
-//º¯ÊýÉùÃ÷
-//³õÊ¼»¯Õ»
+//å‡½æ•°å£°æ˜Ž
+//åˆå§‹åŒ–æ ˆ
 void initStack(PSEQSTACK S);
-//ÅÐ¶ÏÕ»Ê±ºòÎª¿Õ
+//åˆ¤æ–­æ ˆæ—¶å€™ä¸ºç©º
 bool isEmpty(PSEQSTACK S);
-//ÅÐ¶ÏÕ»Âú
+//åˆ¤æ–­æ ˆæ»¡
 bool isFull(PSEQSTACK S);
-//ÈëÕ»
+//å…¥æ ˆ
 void push(PSEQSTACK S, DataType d);
-//³öÕ»
+//å‡ºæ ˆ
 DataType pop(PSEQSTACK S);
-//±éÀúÕ»
+//éåŽ†æ ˆ
 void traverse(PSEQSTACK S);
 
 int main(void)
@@ -49,7 +49,7 @@ int main(void)
 	traverse(&S);
 }
 /*****************************************************************************
-    *  @brief    : initStack ³õÊ¼»¯Õ»
+    *  @brief    : initStack åˆå§‹åŒ–æ ˆ
     *  @author   : Zhangle
     *  @date     : 2014/10/21 8:53
     *  @version  : ver 1.0
@@ -58,10 +58,10 @@ int main(void)
 *****************************************************************************/
 void initStack(PSEQSTACK S)
 {
-	S->top = 0; //Ô¼¶¨topÎª0Ê±£¬Õ»ÖÐÎÞÔªËØ£¬¼´Îª¿Õ
+	S->top = 0; //çº¦å®štopä¸º0æ—¶ï¼Œæ ˆä¸­æ— å…ƒç´ ï¼Œå³ä¸ºç©º
 }
 /*****************************************************************************
-    *  @brief    : isEmpty ÅÐ¶ÏÕ»ÊÇ·ñÎª¿Õ
+    *  @brief    : isEmpty åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
     *  @author   : Zhangle
     *  @date     : 2014/10/21 8:54
     *  @version  : ver 1.0
@@ -73,7 +73,7 @@ bool isEmpty(PSEQSTACK S)
 	return S->top == 0;
 }
 /*****************************************************************************
-    *  @brief    : isFull ÅÐ¶ÏÕ»ÊÇ·ñÒÑÂú
+    *  @brief    : isFull åˆ¤æ–­æ ˆæ˜¯å¦å·²æ»¡
     *  @author   : Zhangle
     *  @date     : 2014/10/21 8:55
     *  @version  : ver 1.0
@@ -86,7 +86,7 @@ bool isFull(PSEQSTACK S)
 }
 
 /*****************************************************************************
-    *  @brief    : push ÈëÕ»
+    *  @brief    : push å…¥æ ˆ
     *  @author   : Zhangle
     *  @date     : 2014/10/21 9:01
     *  @version  : ver 1.0
@@ -95,17 +95,17 @@ bool isFull(PSEQSTACK S)
 *****************************************************************************/
 void push(PSEQSTACK S, DataType d)
 {
-	//½øÕ»Ö®Ç°ÏÈÅÐ¶ÏÕ»ÊÇ·ñÒÑÂú
-	if (isFull(S)) //Õ»Âú
+	//è¿›æ ˆä¹‹å‰å…ˆåˆ¤æ–­æ ˆæ˜¯å¦å·²æ»¡
+	if (isFull(S)) 			// æ ˆæ»¡
 	{
-		printf("Õ»ÒÑÂú£¬ÈëÕ»Ê§°Ü¡£\n");
+		printf("æ ˆå·²æ»¡ï¼Œå…¥æ ˆå¤±è´¥ã€‚\n");
 		exit(-1);
 	}
-	S->top ++; //Õ»¶¥Ö¸Õë¼Ó1
-	S->data[S->top] = d; //dÈëÕ»
+	S->top ++; 				// æ ˆé¡¶æŒ‡é’ˆåŠ  1
+	S->data[S->top] = d; 	// d å…¥æ ˆ
 }
 /*****************************************************************************
-    *  @brief    : pop ³öÕ»
+    *  @brief    : pop å‡ºæ ˆ
     *  @author   : Zhangle
     *  @date     : 2014/10/21 9:02
     *  @version  : ver 1.0
@@ -115,17 +115,18 @@ void push(PSEQSTACK S, DataType d)
 DataType pop(PSEQSTACK S)
 {
 	DataType data;
-	//³öÕ»Ç°ÏÈÅÐ¶ÏÕ»ÊÇ·ñÎª¿Õ
+	//å‡ºæ ˆå‰å…ˆåˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
 	if (isEmpty(S))
 	{
-		printf("Õ»¿Õ£¬ÎÞ·¨³öÕ»¡£\n");
+		printf("æ ˆç©ºï¼Œæ— æ³•å‡ºæ ˆã€‚\n");
 		exit(-1);
 	}
-	data = S->data[S->top];//³öÕ»
-	S->top--; //Í·Ö¸Õë¼õ1
+	data = S->data[S->top];		// å‡ºæ ˆ
+	S->top--; 					// å¤´æŒ‡é’ˆå‡ 1
+	return data;
 }
 /*****************************************************************************
-    *  @brief    : traverse ±éÀúÕ»
+    *  @brief    : traverse éåŽ†æ ˆ
     *  @author   : Zhangle
     *  @date     : 2014/10/21 9:10
     *  @version  : ver 1.0
@@ -135,7 +136,7 @@ DataType pop(PSEQSTACK S)
 void traverse(PSEQSTACK S)
 {
 	int i = 0;
-	//Õ»ÊÇÏÈ½øºó³ö£¬¹ÊÏÈ´ÓÕ»¶¥Êä³ö
+	//æ ˆæ˜¯å…ˆè¿›åŽå‡ºï¼Œæ•…å…ˆä»Žæ ˆé¡¶è¾“å‡º
 	for (i=S->top; i>0; --i)
 	{
 		printf("%c ",S->data[i]);
