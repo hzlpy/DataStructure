@@ -8,25 +8,27 @@ typedef enum _bool
 }bool;
 
 // 定义结构体
-struct Array
+typedef struct Array
 {
 	int * pBase;
 	int length;
 	int count;		// 有效元素的个数
-};
+}*PARRAY, ARRAY;
 
 // 声明函数
-void init(struct Array *pArray, int length);
-void print(struct Array *pArray);
-void append(struct Array *pArray, int value);
-void insert(struct Array *pArray, int index, int value);//position指定待插入元素的索引，元素插入成功后，index对应的元素以后的元素依此后移一位
-int length();
-bool isEmpty(struct Array *pArray);
-bool isFull(struct Array *pArray);
+void init(PARRAY, int length);
+void print(PARRAY pArray);
+void append(PARRAY pArray, int value);
+void insert(PARRAY pArray, int index, int value);//position指定待插入元素的索引，元素插入成功后，index对应的元素以后的元素依此后移一位
+int length(PARRAY pArray);
+bool isEmpty(PARRAY pArray);
+bool isFull(PARRAY pArray);
+int MyLength(PARRAY pArray);
+int MyCount(PARRAY pArray);
 
 int main(void)
 {
-	struct Array pArr;
+	ARRAY pArr;
 	int len = 10;
 	init(&pArr,len);
 	print(&pArr);
@@ -36,6 +38,24 @@ int main(void)
 	append(&pArr,5);
 	append(&pArr,6);
 	insert(&pArr,3,4);
+	append(&pArr,7);
+	append(&pArr,8);
+	append(&pArr,9);
+	append(&pArr,10);
+	append(&pArr,11);
+	print(&pArr);
+	append(&pArr,7);
+	append(&pArr,8);
+	append(&pArr,9);
+	append(&pArr,10);
+	append(&pArr,11);
+	append(&pArr,7);
+	append(&pArr,8);
+	append(&pArr,9);
+	append(&pArr,10);
+	append(&pArr,11);
+	MyLength(&pArr);
+	MyCount(&pArr);
 	print(&pArr);
 }
 /*****************************************************************************
@@ -46,10 +66,10 @@ int main(void)
     *  @inparam  : 
     *  @outparam :  
 *****************************************************************************/
-void init(struct Array *pArray, int length)
+void init(PARRAY pArray, int length)
 {
 	//动态分配内存
-	pArray->pBase = (int *)malloc(sizeof(int)*length);
+	pArray->pBase = (int *)malloc(sizeof(int) * length);
 	if (NULL == pArray->pBase)
 	{
 		printf("动态分配内存失败..\n");
@@ -70,7 +90,7 @@ void init(struct Array *pArray, int length)
     *  @inparam  : 
     *  @outparam :  
 *****************************************************************************/
-bool isEmpty(struct Array *pArray)
+bool isEmpty(PARRAY pArray)
 {
 	if (pArray->count == 0)		// 数组中有效元素个数为 0，数组为空，返回 true
 	{
@@ -89,7 +109,7 @@ bool isEmpty(struct Array *pArray)
     *  @inparam  : 
     *  @outparam :  
 *****************************************************************************/
-bool isFull(struct Array *pArray)
+bool isFull(PARRAY pArray)
 {
 	//判断count与length的大小
 	if (pArray->count >= pArray->length)
@@ -109,7 +129,7 @@ bool isFull(struct Array *pArray)
     *  @inparam  : 
     *  @outparam :  
 *****************************************************************************/
-void print(struct Array *pArray)
+void print(PARRAY pArray)
 {
 	if (isEmpty(pArray))
 	{
@@ -134,18 +154,53 @@ void print(struct Array *pArray)
     *  @inparam  : 
     *  @outparam :  
 *****************************************************************************/
-void append(struct Array *pArray, int value)
+void append(PARRAY pArray, int value)
 {
 	//追加元素前先判断count与length的大小
 	if (isFull(pArray))
 	{
 		//数组已满，请为它分配新的内存
+		int length = pArray->length;
+		int newLength = 2 * length;
+
+		int* pBaseStart = pArray->pBase;
+		int *tmpArray = (int *)malloc(sizeof(int) * length);
+		int* tmpStart = tmpArray;
+		if (NULL == tmpArray)
+		{
+			printf("申请内存失败。\n");
+			exit(-1);
+		}
+		int i=0;
+		for(i=0; i<length; i++) {
+			*tmpArray = *(pArray->pBase);
+			tmpArray ++;
+			(pArray->pBase) ++;
+		}
+		pArray->pBase = pBaseStart;
+		tmpArray = tmpStart;
+		free(pArray->pBase);
+		pArray->pBase = NULL;
+		pArray->pBase = (int*)malloc(sizeof(int) * newLength);
+		pArray->length = newLength;
+		pBaseStart = pArray->pBase;
+		if (NULL == pArray->pBase)
+		{
+			printf("申请内存失败。\n");
+			exit(-1);
+		}
+		for (i=0; i<length; i++) {
+			*(pArray->pBase) = *tmpArray;
+			pArray->pBase ++;
+			tmpArray ++;
+		}
+		pArray->pBase = pBaseStart;
+		tmpArray = tmpStart;
+		free(tmpArray);
+		tmpArray = NULL;
 	} 
-	else //追加元素
-	{
-		pArray->pBase[pArray->count] = value;
-		pArray->count ++;
-	}
+	pArray->pBase[pArray->count] = value;
+	pArray->count ++;
 }
 
 /*****************************************************************************
@@ -158,7 +213,7 @@ void append(struct Array *pArray, int value)
 	*  @inparam  : value 待插入的值
     *  @outparam :  
 *****************************************************************************/
-void insert(struct Array *pArray, int index, int value)
+void insert(PARRAY pArray, int index, int value)
 {
 	int i = 0;
 	//插入元素前先判断count与length的大小
@@ -178,4 +233,24 @@ void insert(struct Array *pArray, int index, int value)
 		// 插入后 count 加 1
 		pArray->count++;
 	}
+}
+
+int MyCount(PARRAY pArray)
+{
+	if (NULL == pArray)
+	{
+		return -1;
+	}
+	printf("count = %d \n", pArray->count);
+	return pArray->count;
+}
+
+int MyLength(PARRAY pArray)
+{
+	if (NULL == pArray)
+	{
+		return -1;
+	}
+	printf("length = %d \n", pArray->length);
+	return pArray->length;
 }
