@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
 
-//定义双向链表结构
+// 定义双向链表结构
 typedef struct node
 {
 	int data;
 	struct node *next;
 	struct node *prev;
-}LinkList, *PNODE, NODE;
+}LinkedList, *PLinkedList, *PNODE, NODE;
 
 /*
  * @function    : create
@@ -19,18 +18,18 @@ typedef struct node
  * @outparam    : void
  * @description : 创建一个双向链表
  */
-LinkList *create()
+PLinkedList create()
 {
-	LinkList *pHead = (PNODE)malloc(sizeof(NODE));
+	PNODE pHead = (PNODE)malloc(sizeof(NODE));
 	if (NULL == pHead) {
 		exit(-1);
 	}
 	PNODE pRear = pHead;
 	pRear->next = NULL;
-	//要添加count个结点
+	//要添加 count 个结点
 	int count = 0;
 	int i, value;
-	printf("清输入要求添加的结点的个数: ");
+	printf("请输入要求添加的结点的个数: ");
 	scanf("%d", &count);
 	for (i=1; i <= count; i++) {
 		//添加新结点
@@ -56,7 +55,7 @@ LinkList *create()
  * @outparam    : void
  * @description : 遍历链表
  */
-void traverse(LinkList *pHead)
+void traverse(PLinkedList pHead)
 {
 	if (NULL == pHead) {
 		return;
@@ -78,7 +77,7 @@ void traverse(LinkList *pHead)
  * @outparam    : void
  * @description : 从尾部结点开始遍历
  */
-void reverseTra(LinkList *pHead)
+void reverseTra(PLinkedList pHead)
 {
 	if (NULL == pHead) {
 		return;
@@ -86,7 +85,7 @@ void reverseTra(LinkList *pHead)
 	PNODE rear, first, temp;
 	temp = rear = pHead;
 
-	//先找到尾部结点
+	// 先找到尾部结点
 	while (NULL != temp->next) {
 		temp= temp->next;
 		rear = rear->next;
@@ -100,7 +99,7 @@ void reverseTra(LinkList *pHead)
 
 int main()
 {
-	LinkList *list = create();
+	PLinkedList list = create();
 	traverse(list);
 	reverseTra(list);
 	return 0;
