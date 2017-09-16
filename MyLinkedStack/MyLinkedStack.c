@@ -8,7 +8,7 @@ typedef enum
 	false,true
 }bool;
 
-//½á¹¹Ìå¶¨Òå
+//ç»“æ„ä½“å®šä¹‰
 typedef struct node
 {
 	DataType data;
@@ -17,19 +17,19 @@ typedef struct node
 
 typedef struct linkedstack
 {
-	PNODE top;//Õ»¶¥Ö¸Õë
+	PNODE top;		//æ ˆé¡¶æŒ‡é’ˆ
 }LINKEDSTACK, *PLINKEDSTACK;
 
-//º¯ÊıÉùÃ÷
-//³õÊ¼»¯Õ»
+// å‡½æ•°å£°æ˜
+// åˆå§‹åŒ–æ ˆ
 void initStack(PLINKEDSTACK pLinkedStack);
-//ÅĞ¶ÏÕ»ÊÇ·ñÎª¿Õ
+// åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
 bool isEmpty(PLINKEDSTACK pLinkedStack);
-//ÈëÕ»²Ù×÷
+// å…¥æ ˆæ“ä½œ
 void push(PLINKEDSTACK pLinkedStack, DataType data);
-//³öÕ»²Ù×÷
+// å‡ºæ ˆæ“ä½œ
 DataType pop(PLINKEDSTACK pLinkedStack);
-//±éÀúÕ»
+// éå†æ ˆ
 void traverse(PLINKEDSTACK pLinkedStack);
 
 int main(void)
@@ -44,14 +44,14 @@ int main(void)
 	push(&linkedStack,'f');
 	push(&linkedStack,'g');
 	traverse(&linkedStack);
-	printf("%c³öÕ»\n",pop(&linkedStack));
-	printf("%c³öÕ»\n",pop(&linkedStack));
+	printf("%c å‡ºæ ˆ\n",pop(&linkedStack));
+	printf("%c å‡ºæ ˆ\n",pop(&linkedStack));
 	traverse(&linkedStack);
 	return 0;
 }
 
 /*****************************************************************************
-    *  @brief    : initStack ³õÊ¼»¯Õ»
+    *  @brief    : initStack åˆå§‹åŒ–æ ˆ
     *  @author   : Zhangle
     *  @date     : 2014/10/21 9:42
     *  @version  : ver 1.0
@@ -69,7 +69,7 @@ bool isEmpty(PLINKEDSTACK pLinkedStack)
 }
 
 /*****************************************************************************
-    *  @brief    : push ÔªËØÈëÕ»
+    *  @brief    : push å…ƒç´ å…¥æ ˆ
     *  @author   : Zhangle
     *  @date     : 2014/10/21 9:47
     *  @version  : ver 1.0
@@ -78,20 +78,20 @@ bool isEmpty(PLINKEDSTACK pLinkedStack)
 *****************************************************************************/
 void push(PLINKEDSTACK pLinkedStack, DataType data)
 {
-	//ÉêÇëÒ»¸öĞÂ½Úµã£¬ÎªĞÂ½Úµã¶¯Ì¬·ÖÅäÄÚ´æ
+	//ç”³è¯·ä¸€ä¸ªæ–°èŠ‚ç‚¹ï¼Œä¸ºæ–°èŠ‚ç‚¹åŠ¨æ€åˆ†é…å†…å­˜
 	PNODE pNew = (PNODE)malloc(sizeof(NODE));
-	//ÅĞ¶Ï¶¯Ì¬·ÖÅäÄÚ´æÊ±ºò³É¹¦
+	//åˆ¤æ–­åŠ¨æ€åˆ†é…å†…å­˜æ—¶å€™æˆåŠŸ
 	if (pNew == NULL)
 	{
-		printf("¶¯Ì¬·ÖÅäÄÚ´æÊ§°Ü¡£\n");
+		printf("åŠ¨æ€åˆ†é…å†…å­˜å¤±è´¥ã€‚\n");
 		exit(-1);
 	}
-	pNew->data = data;//½«Öµdata¸³¸øĞÂ½Úµã
-	pNew->pNext = pLinkedStack->top;//ĞÂ½ÚµãµÄÖ¸ÕëpNextÖ¸ÏòÁ´±íµÄÍ·½Úµã
-	pLinkedStack->top = pNew;//ĞÂ½Úµã±äÎªÍ·½Úµã
+	pNew->data = data;					// å°†å€¼ data èµ‹ç»™æ–°èŠ‚ç‚¹
+	pNew->pNext = pLinkedStack->top;	// æ–°èŠ‚ç‚¹çš„æŒ‡é’ˆ pNext æŒ‡å‘é“¾è¡¨çš„å¤´èŠ‚ç‚¹
+	pLinkedStack->top = pNew;			// æ–°èŠ‚ç‚¹å˜ä¸ºå¤´èŠ‚ç‚¹
 }
 /*****************************************************************************
-    *  @brief    : pop ÔªËØ³öÕ»
+    *  @brief    : pop å…ƒç´ å‡ºæ ˆ
     *  @author   : Zhangle
     *  @date     : 2014/10/21 10:03
     *  @version  : ver 1.0
@@ -101,21 +101,21 @@ void push(PLINKEDSTACK pLinkedStack, DataType data)
 DataType pop(PLINKEDSTACK pLinkedStack)
 {
 	DataType data;
-	PNODE pTop = pLinkedStack->top;//±£´æÕ»¶¥Ö¸Õë
-	//ÅĞ¶ÏÕ»ÊÇ·ñÎª¿Õ
+	PNODE pTop = pLinkedStack->top;		// ä¿å­˜æ ˆé¡¶æŒ‡é’ˆ
+	// åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
 	if (isEmpty(pLinkedStack))
 	{
-		printf("Õ»Îª¿Õ£¬³öÕ»Ê§°Ü£¬ÍË³ö³ÌĞò¡£\n");
+		printf("æ ˆä¸ºç©ºï¼Œå‡ºæ ˆå¤±è´¥ï¼Œé€€å‡ºç¨‹åºã€‚\n");
 		exit(-1);
 	}
-	data = pTop->data;//½«Í·½ÚµãµÄÖµ¸³¸ødata£¬²¢·µ»Ø
-	pLinkedStack->top = pTop->pNext;//Í·½ÚµãµÄÖ¸ÕëÖ¸ÏòÏÂÒ»¸ö½Úµã
+	data = pTop->data;					// å°†å¤´èŠ‚ç‚¹çš„å€¼èµ‹ç»™ dataï¼Œå¹¶è¿”å›
+	pLinkedStack->top = pTop->pNext;	// å¤´èŠ‚ç‚¹çš„æŒ‡é’ˆæŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
 	free(pTop);
 	pTop = NULL;
 	return data;
 }
 /*****************************************************************************
-    *  @brief    : traverse ±éÀúÕ»
+    *  @brief    : traverse éå†æ ˆ
     *  @author   : Zhangle
     *  @date     : 2014/10/21 10:12
     *  @version  : ver 1.0
